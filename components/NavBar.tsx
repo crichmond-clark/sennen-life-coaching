@@ -38,6 +38,7 @@ export function NavBar({
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'Testimonials', href: '/testimonials' },
     { name: 'Booking', href: '/booking' },
   ]
 

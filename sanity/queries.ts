@@ -84,6 +84,18 @@ export const aboutQuery = `*[_type == "about"][0] {
   }
 }`
 
+export const bookingQuery = `*[_type == "booking"][0] {
+  heroHeading,
+  heroSubtitle,
+  scheduleHeading,
+  contactHeading,
+  faqHeading,
+  faqs[] {
+    question,
+    answer
+  }
+}`
+
 export const servicesQuery = `*[_type == "service"] | order(sortOrder asc) {
   _id,
   title,

@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
+import crypto from 'crypto'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -35,11 +36,19 @@ async function pushSingleton(filePath: string, docId: string) {
   console.log(`  ✓ ${doc._type} updated`)
 }
 
-async function pushDocuments(filePath: string) {
+function generateDocId(prefix: string, data: any): string {
+  const hash = crypto.createHash('md5').update(JSON.stringify(data)).digest('hex').slice(0, 12)
+  return `${prefix}-${hash}`
+}
+
+async function pushDocuments(filePath: string, prefix: string) {
   const fullPath = resolve(process.cwd(), filePath)
   const docs = JSON.parse(readFileSync(fullPath, 'utf-8'))
 
   for (const doc of docs) {
+    if (!doc._id) {
+      doc._id = generateDocId(prefix, doc)
+    }
     console.log(`Pushing ${doc._type}: ${doc.title || doc.authorName || 'document'}...`)
     await client.createOrReplace(doc)
     console.log(`  ✓ ${doc._type} created/replaced`)
@@ -52,9 +61,10 @@ async function main() {
   await pushSingleton('content/site-settings.json', 'siteSettings')
   await pushSingleton('content/home.json', 'home')
   await pushSingleton('content/about.json', 'about')
+  await pushSingleton('content/booking.json', 'booking')
 
-  await pushDocuments('content/services.json')
-  await pushDocuments('content/testimonials.json')
+  await pushDocuments('content/services.json', 'service')
+  await pushDocuments('content/testimonials.json', 'testimonial')
 
   console.log('\n✅ All content pushed successfully.')
   console.log('   Changes will appear on the site within 60 seconds (ISR revalidation).')

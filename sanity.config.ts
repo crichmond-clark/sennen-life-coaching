@@ -39,6 +39,14 @@ export default defineConfig({
                   .schemaType('about')
                   .documentId('about')
               ),
+            S.listItem()
+              .title('Booking Page')
+              .id('booking')
+              .child(
+                S.document()
+                  .schemaType('booking')
+                  .documentId('booking')
+              ),
             S.divider(),
             S.documentTypeListItem('service').title('Services'),
             S.documentTypeListItem('testimonial').title('Testimonials'),

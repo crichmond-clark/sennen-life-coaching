@@ -60,6 +60,22 @@ export interface Service {
   sortOrder: number
 }
 
+// Booking Page
+export interface FAQ {
+  question: string
+  answer: string
+}
+
+export interface BookingPage {
+  _id: string
+  heroHeading: string
+  heroSubtitle: string
+  scheduleHeading: string
+  contactHeading: string
+  faqHeading: string
+  faqs?: FAQ[]
+}
+
 // Testimonial
 export interface Testimonial {
   _id: string

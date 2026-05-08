@@ -1,0 +1,19 @@
+{
+  "_type": "booking",
+  "_id": "booking",
+  "heroHeading": "Begin Your Journey",
+  "heroSubtitle": "Take a deep breath. Inquire about a session below, or simply send a note to connect. I look forward to holding space for you.",
+  "scheduleHeading": "Schedule Your Session",
+  "contactHeading": "Or send a gentle note",
+  "faqHeading": "Good to know",
+  "faqs": [
+    {
+      "question": "Where do sessions take place?",
+      "answer": "In-person sessions are held at my private shala in Ubud. Virtual sessions take place via Zoom."
+    },
+    {
+      "question": "What is your cancellation policy?",
+      "answer": "I ask for 48 hours notice for a full refund, honoring both your time and mine."
+    }
+  ]
+}
