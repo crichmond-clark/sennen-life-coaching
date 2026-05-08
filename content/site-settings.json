@@ -1,0 +1,15 @@
+{
+  "_type": "siteSettings",
+  "_id": "siteSettings",
+  "brandName": "Sennen Life Coaching",
+  "tagline": "Rooted in Grace",
+  "bookingUrl": "",
+  "contactEmail": "hello@sennenlifecoaching.com",
+  "socialLinks": [
+    { "platform": "Instagram", "url": "" },
+    { "platform": "TikTok", "url": "" },
+    { "platform": "LinkedIn", "url": "" },
+    { "platform": "Facebook", "url": "" },
+    { "platform": "X", "url": "" }
+  ]
+}

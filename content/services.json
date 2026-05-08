@@ -1,0 +1,47 @@
+[
+  {
+    "_type": "service",
+    "title": "The Grounding Session",
+    "slug": { "_type": "slug", "current": "grounding-session" },
+    "price": "$120",
+    "duration": "90 Mins",
+    "description": "A foundational experience designed to anchor your energy and calm the nervous system.",
+    "features": [
+      "Guided somatic meditation",
+      "Breathwork for anxiety release",
+      "Personalized intention setting",
+      "Follow-up soulwork prompt"
+    ],
+    "sortOrder": 0
+  },
+  {
+    "_type": "service",
+    "title": "The Align & Awaken",
+    "slug": { "_type": "slug", "current": "align-and-awaken" },
+    "price": "$250",
+    "duration": "Half Day",
+    "description": "An immersive deep dive into your current energetic blocks and spiritual path.",
+    "features": [
+      "Cacao heart-opening ritual",
+      "In-depth intuitive reading",
+      "Energy clearing & somatic gentle movement",
+      "Customized home practice plan"
+    ],
+    "sortOrder": 1
+  },
+  {
+    "_type": "service",
+    "title": "The Sacred Container",
+    "slug": { "_type": "slug", "current": "sacred-container" },
+    "price": "$800",
+    "duration": "4 Weeks",
+    "description": "A transformative one-on-one mentorship for those seeking profound shifts.",
+    "features": [
+      "Weekly 90-minute sessions",
+      "Direct voice-note support between calls",
+      "Bespoke guided meditations",
+      "Access to the Soul Community circle"
+    ],
+    "sortOrder": 2
+  }
+]

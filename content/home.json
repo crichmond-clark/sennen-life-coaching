@@ -1,0 +1,32 @@
+{
+  "_type": "home",
+  "_id": "home",
+  "heroHeading": "Rooted in Grace",
+  "heroSubtitle": "A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived.",
+  "heroCtaText": "Begin Your Journey",
+  "philosophyHeading": "The Art of Slowing Down.",
+  "philosophyBody": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "In a world that constantly demands more, we offer a space to simply be. Our philosophy is rooted in the earth, drawing inspiration from the tactile textures of nature and the gentle rhythm of the tides.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Here, every breath is intentional, every movement is unhurried. We believe true luxury is found in connection—to oneself, to the environment, and to the present moment.",
+          "marks": []
+        }
+      ]
+    }
+  ]
+}
