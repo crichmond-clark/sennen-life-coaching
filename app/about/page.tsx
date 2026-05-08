@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Flower, Droplet, Leaf, Sun, Heart } from 'lucide-react'
 import { getAbout } from '@/sanity/fetch'
 import { urlFor } from '@/sanity/image'
+
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Learn about Sennen\'s journey from corporate life to spiritual coaching. Discover the philosophy behind Rooted in Grace.',
+}
 
 export const revalidate = 60
 

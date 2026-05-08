@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getServices } from '@/sanity/fetch'
+
+export const metadata: Metadata = {
+  title: 'Services',
+  description: 'Explore coaching offerings from grounding sessions to deep transformative mentorship. Find the path that calls to your current season.',
+}
 
 export const revalidate = 60
 

@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import { getSiteSettings } from '@/sanity/fetch'
 import { BookingEmbed } from '@/components/BookingEmbed'
 import { ContactForm } from '@/components/ContactForm'
+
+export const metadata: Metadata = {
+  title: 'Book a Session',
+  description: 'Schedule a coaching session or send an inquiry. In-person sessions in Ubud and virtual sessions via Zoom available.',
+}
 
 export const revalidate = 60
 
