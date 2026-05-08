@@ -23,8 +23,22 @@ export default defineConfig({
                   .documentId('siteSettings')
               ),
             S.divider(),
-            S.documentTypeListItem('home').title('Home Page'),
-            S.documentTypeListItem('about').title('About Page'),
+            S.listItem()
+              .title('Home Page')
+              .id('home')
+              .child(
+                S.document()
+                  .schemaType('home')
+                  .documentId('home')
+              ),
+            S.listItem()
+              .title('About Page')
+              .id('about')
+              .child(
+                S.document()
+                  .schemaType('about')
+                  .documentId('about')
+              ),
             S.divider(),
             S.documentTypeListItem('service').title('Services'),
             S.documentTypeListItem('testimonial').title('Testimonials'),
