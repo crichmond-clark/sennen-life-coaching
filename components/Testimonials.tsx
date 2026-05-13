@@ -40,11 +40,11 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               }`}
             >
               {/* Decorative quote mark */}
-              <div className="absolute top-6 left-6 text-[80px] text-secondary/10 font-serif leading-none">"</div>
+              <div className="absolute top-6 left-6 text-[80px] text-secondary/10 font-serif leading-none">&ldquo;</div>
               
               {/* Quote */}
               <p className="text-body-lg text-on-surface font-light leading-relaxed mb-8 relative z-10">
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
               
               {/* Author */}

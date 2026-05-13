@@ -70,7 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={`${jakarta.variable} ${playfair.variable} scroll-smooth`}>
-      <body className="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col" suppressHydrationWarning>
+      <body className="bg-background text-on-background text-body-md antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col" suppressHydrationWarning>
         <NavBar
           brandName={settings?.brandName || 'Sennen Life Coaching'}
           tagline={settings?.tagline || 'Rooted in Grace'}

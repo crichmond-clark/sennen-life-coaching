@@ -50,7 +50,7 @@ export default async function AboutPage() {
       {/* Journey Sections */}
       {about?.journeySections?.map((section, index) => (
         <section key={index} className="max-w-7xl mx-auto px-container-padding mb-section-gap w-full">
-          <div className={`grid grid-cols-1 md:grid-cols-12 gap-gutter items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
             <div className={`relative group ${index % 2 === 1 ? 'md:col-start-8 md:col-span-5' : 'md:col-span-5 md:col-start-2'}`}>
               <div className="aspect-[3/4] relative organic-shape-1 overflow-hidden shadow-lg border-4 border-surface-container-highest">
                 <Image 
