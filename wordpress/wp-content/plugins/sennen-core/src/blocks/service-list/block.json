@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/service-list",
+  "title": "Service List",
+  "category": "sennen-sections",
+  "description": "Displays a grid of service cards from the Services content type.",
+  "supports": {
+    "align": [ "wide", "full" ],
+    "anchor": true,
+    "color": { "background": true },
+    "spacing": { "margin": true, "padding": true }
+  },
+  "attributes": {
+    "columns": { "type": "number", "default": 3 },
+    "count": { "type": "number", "default": 3 },
+    "orderBy": { "type": "string", "default": "sort_order" },
+    "showFeatures": { "type": "boolean", "default": true },
+    "buttonText": { "type": "string", "default": "Inquire Now" },
+    "buttonUrl": { "type": "string", "default": "/booking" }
+  },
+  "render": "file:./render.php"
+}

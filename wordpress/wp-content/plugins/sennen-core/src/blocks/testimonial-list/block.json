@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/testimonial-list",
+  "title": "Testimonial List",
+  "category": "sennen-sections",
+  "description": "Displays a grid of testimonial cards.",
+  "supports": {
+    "align": [ "wide", "full" ],
+    "anchor": true,
+    "color": { "background": true },
+    "spacing": { "margin": true, "padding": true }
+  },
+  "attributes": {
+    "columns": { "type": "number", "default": 3 },
+    "count": { "type": "number", "default": 3 },
+    "showAvatar": { "type": "boolean", "default": true },
+    "source": { "type": "string", "default": "latest" }
+  },
+  "render": "file:./render.php"
+}
