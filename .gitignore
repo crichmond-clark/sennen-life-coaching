@@ -37,3 +37,14 @@ next-env.d.ts
 
 # Sanity
 .sanity/
+
+# WordPress (local dev)
+wordpress/.env
+wordpress/wp-content/uploads/
+wordpress/wp-content/upgrade/
+wordpress/wp-content/cache/
+wordpress/wp-content/debug.log
+wordpress/wp-content/plugins/sennen-core/build/
+wordpress/wp-content/plugins/sennen-core/node_modules/
+*.sql
+*.sql.gz

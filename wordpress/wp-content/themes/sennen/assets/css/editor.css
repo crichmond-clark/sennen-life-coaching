@@ -1,0 +1,48 @@
+/* Sennen Life Coaching — editor-only visual parity */
+
+/* --- Match frontend organic shapes in editor --- */
+.editor-styles-wrapper .is-style-organic-shape-1 img,
+.editor-styles-wrapper .is-style-organic-shape-1.wp-block-image img {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+}
+
+.editor-styles-wrapper .is-style-organic-shape-2 img,
+.editor-styles-wrapper .is-style-organic-shape-2.wp-block-image img {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.editor-styles-wrapper .is-style-organic-shape-3 img,
+.editor-styles-wrapper .is-style-organic-shape-3.wp-block-image img {
+  border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+}
+
+/* --- Ambient card in editor --- */
+.editor-styles-wrapper .is-style-ambient-card {
+  box-shadow: 0 10px 30px -10px rgba(152, 70, 35, 0.1);
+  border-radius: 4px;
+}
+
+/* --- Textured surface in editor --- */
+.editor-styles-wrapper .is-style-textured-surface {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e5e2db' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* --- Label caps in editor --- */
+.editor-styles-wrapper .is-style-label-caps {
+  font-family: var(--wp--preset--font-family--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* --- Ensure Serif headings render in editor --- */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+  font-family: var(--wp--preset--font-family--serif);
+}
