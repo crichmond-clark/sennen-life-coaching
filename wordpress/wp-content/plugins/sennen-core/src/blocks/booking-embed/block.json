@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/booking-embed",
+  "title": "Booking Embed",
+  "category": "sennen-sections",
+  "description": "Embeds a Calendly (or other) booking widget using the URL from Sennen Settings.",
+  "supports": {
+    "align": [ "wide", "full" ],
+    "anchor": true,
+    "spacing": { "margin": true, "padding": true }
+  },
+  "attributes": {
+    "useGlobalUrl": { "type": "boolean", "default": true },
+    "bookingUrl": { "type": "string", "default": "" },
+    "minHeight": { "type": "number", "default": 700 }
+  },
+  "render": "file:./render.php"
+}

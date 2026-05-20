@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/contact-form",
+  "title": "Contact Form",
+  "category": "sennen-sections",
+  "description": "A contact form that sends submissions to the email configured in Sennen Settings.",
+  "supports": {
+    "align": [ "wide" ],
+    "anchor": true,
+    "spacing": { "margin": true, "padding": true }
+  },
+  "attributes": {
+    "buttonText": { "type": "string", "default": "Send Message" },
+    "successMessage": { "type": "string", "default": "Your message has been sent. I look forward to connecting with you soon." },
+    "inquiryTypes": { "type": "array", "default": [] }
+  },
+  "render": "file:./render.php"
+}

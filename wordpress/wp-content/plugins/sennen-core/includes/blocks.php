@@ -37,6 +37,12 @@ function sennen_core_register_blocks(): void {
 
 	// Botanical divider block.
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/botanical-divider' );
+
+	// Booking embed block.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/booking-embed' );
+
+	// Contact form block.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/contact-form' );
 }
 add_action( 'init', 'sennen_core_register_blocks' );
 
