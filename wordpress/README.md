@@ -88,3 +88,34 @@ For non-technical content editors:
 6. Use **Settings → Sennen** to update the booking URL and contact email.
 
 All page sections are built with blocks and patterns. You can drag, reorder, duplicate, and remove sections from the block editor.
+
+## Production Hardening
+
+Recommended configuration in `wp-config.php`:
+
+```php
+define('DISALLOW_FILE_EDIT', true);
+define('WP_DEBUG_DISPLAY', false);
+define('WP_DEBUG_LOG', true);
+```
+
+Security best practices:
+
+- Keep WordPress core, the `sennen` theme, and `sennen-core` plugin updated.
+- Remove unused default themes (Twenty\u2010*).
+- Remove inactive plugins.
+- Use strong passwords for all admin/editor accounts.
+- Enable two-factor authentication at the host level if available.
+- Set file permissions: directories 755, files 644, `wp-config.php` 600.
+- Use SFTP/SSH, not plain FTP.
+- Configure host-level backups (daily database + files).
+- Lock down XML-RPC if not needed.
+- Do not use the `admin` username for production.
+
+Performance recommendations:
+
+- Enable PHP OPcache at the host level.
+- Enable host-level page caching if available.
+- Use WebP for uploaded images (WordPress 6.7+ supports this natively).
+- Consider a free caching plugin only if needed; the custom theme is already lean.
+- Monitor for slow queries in Query Monitor during development.

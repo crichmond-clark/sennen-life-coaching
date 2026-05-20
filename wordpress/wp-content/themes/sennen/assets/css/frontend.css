@@ -87,6 +87,39 @@
   }
 }
 
+/* --- Skip to content link --- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 1rem;
+  background: var(--wp--preset--color--primary);
+  color: var(--wp--preset--color--on-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --- Responsive card grid single column --- */
+@media (max-width: 768px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column:not(:only-child) {
+    flex-basis: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* --- Constrain paragraph width for readability on large screens --- */
+@media (min-width: 1024px) {
+  .wp-block-post-content p:not(.has-text-align-center):not(.has-text-align-right) {
+    max-width: 65ch;
+  }
+}
+
 /* --- Focus states --- */
 a:focus-visible,
 button:focus-visible,

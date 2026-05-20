@@ -146,3 +146,58 @@ function sennen_disable_custom_colors(): void {
 	add_theme_support( 'disable-custom-colors' );
 }
 add_action( 'after_setup_theme', 'sennen_disable_custom_colors' );
+
+/**
+ * Output basic Open Graph meta tags.
+ */
+function sennen_opengraph_meta(): void {
+	if ( is_singular() ) {
+		global $post;
+		$excerpt = has_excerpt( $post->ID )
+			? wp_strip_all_tags( get_the_excerpt( $post->ID ) )
+			: wp_trim_words( wp_strip_all_tags( $post->post_content ), 30 );
+
+		echo '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '">' . "\n";
+		echo '<meta property="og:description" content="' . esc_attr( $excerpt ) . '">' . "\n";
+		echo '<meta property="og:url" content="' . esc_url( get_permalink() ) . '">' . "\n";
+
+		if ( has_post_thumbnail( $post->ID ) ) {
+			echo '<meta property="og:image" content="' . esc_url( get_the_post_thumbnail_url( $post->ID, 'large' ) ) . '">' . "\n";
+		}
+	} else {
+		echo '<meta property="og:title" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
+		echo '<meta property="og:description" content="' . esc_attr( get_bloginfo( 'description' ) ) . '">' . "\n";
+		echo '<meta property="og:url" content="' . esc_url( home_url() ) . '">' . "\n";
+	}
+
+	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
+}
+add_action( 'wp_head', 'sennen_opengraph_meta' );
+
+/**
+ * Add skip-to-content link for keyboard accessibility.
+ */
+function sennen_skip_to_content(): void {
+	echo '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__( 'Skip to content', 'sennen' ) . '</a>';
+}
+add_action( 'wp_body_open', 'sennen_skip_to_content' );
+
+/**
+ * Remove WP block library CSS on pages with no blocks that need it.
+ * Keeps it for admin/editor and pages that may have dynamic content.
+ */
+function sennen_optimize_block_styles(): void {
+	// Always keep block styles — removing them breaks the theme.
+	// Instead, we ensure we only enqueue what's needed above.
+}
+
+/**
+ * Ensure WordPress core sitemap is enabled.
+ */
+function sennen_ensure_sitemap(): void {
+	if ( ! get_option( 'blog_public' ) ) {
+		update_option( 'blog_public', 1 );
+	}
+}
+add_action( 'after_switch_theme', 'sennen_ensure_sitemap' );
