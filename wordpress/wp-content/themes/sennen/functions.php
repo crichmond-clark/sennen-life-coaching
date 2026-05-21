@@ -60,9 +60,12 @@ function sennen_setup(): void {
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'editor-styles' );
 
-	// Load the parity CSS into the editor so it matches the frontend.
-	// add_editor_style() is called later (in sennen_enqueue_assets) because
-	// it needs to run after the CSS file exists.
+	// Editor iframe styles. These must be registered during theme setup,
+	// not wp_enqueue_scripts, otherwise the block editor never receives them.
+	add_editor_style( 'assets/css/sennen-parity.css' );
+	add_editor_style( 'assets/css/fonts.css' );
+	add_editor_style( 'assets/css/editor.css' );
+
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'post-thumbnails' );
@@ -96,11 +99,6 @@ function sennen_enqueue_assets(): void {
 		$theme_version
 	);
 
-	// Editor styles — parity CSS + fonts so editor matches frontend.
-	add_editor_style( 'assets/css/sennen-parity.css' );
-	add_editor_style( 'assets/css/fonts.css' );
-	add_editor_style( 'assets/css/editor.css' );
-
 	// Self-hosted fonts.
 	wp_enqueue_style(
 		'sennen-fonts',
@@ -119,6 +117,36 @@ function sennen_enqueue_assets(): void {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'sennen_enqueue_assets' );
+
+/**
+ * Enqueue parity assets in the block editor chrome as well as the iframe.
+ * add_editor_style() handles the canvas; this makes previews/tooling consistent.
+ */
+function sennen_enqueue_block_editor_assets(): void {
+	$theme_version = wp_get_theme()->get( 'Version' );
+
+	wp_enqueue_style(
+		'sennen-editor-parity',
+		get_template_directory_uri() . '/assets/css/sennen-parity.css',
+		array(),
+		$theme_version
+	);
+
+	wp_enqueue_style(
+		'sennen-editor-fonts',
+		get_template_directory_uri() . '/assets/css/fonts.css',
+		array(),
+		$theme_version
+	);
+
+	wp_enqueue_style(
+		'sennen-editor-overrides',
+		get_template_directory_uri() . '/assets/css/editor.css',
+		array( 'sennen-editor-parity', 'sennen-editor-fonts' ),
+		$theme_version
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'sennen_enqueue_block_editor_assets' );
 
 /**
  * Register block pattern categories.
