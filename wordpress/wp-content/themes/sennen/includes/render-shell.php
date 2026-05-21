@@ -38,9 +38,11 @@ function sennen_render_nav(): void {
 	?>
 	<nav class="sennen-nav sennen-nav--transparent" id="sennen-nav" aria-label="<?php esc_attr_e( 'Main navigation', 'sennen' ); ?>">
 		<div class="sennen-nav-inner">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-headline-md tracking-tight z-10 relative hover:opacity-80 transition-opacity" style="color: var(--color-primary); text-decoration: none;">
-				<?php echo esc_html( $brand_name ); ?>
-			</a>
+			<div class="sennen-nav-brand">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="text-headline-md tracking-tight hover:opacity-80 transition-opacity" style="color: var(--color-primary); text-decoration: none;">
+					<?php echo esc_html( $brand_name ); ?>
+				</a>
+			</div>
 
 			<!-- Desktop Nav Links -->
 			<div class="sennen-nav-links">
@@ -55,15 +57,17 @@ function sennen_render_nav(): void {
 				<?php endforeach; ?>
 			</div>
 
-			<a href="<?php echo esc_url( $booking_url ); ?>" class="sennen-nav-cta">
-				Begin Your Journey
-			</a>
+			<div class="sennen-nav-actions">
+				<a href="<?php echo esc_url( $booking_url ); ?>" class="sennen-nav-cta">
+					Begin Your Journey
+				</a>
 
-			<!-- Mobile Menu Toggle -->
-			<button class="sennen-nav-toggle" id="sennen-mobile-toggle" aria-label="<?php esc_attr_e( 'Toggle menu', 'sennen' ); ?>" aria-expanded="false">
-				<svg id="sennen-icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-				<svg id="sennen-icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-			</button>
+				<!-- Mobile Menu Toggle -->
+				<button class="sennen-nav-toggle" id="sennen-mobile-toggle" aria-label="<?php esc_attr_e( 'Toggle menu', 'sennen' ); ?>" aria-expanded="false">
+					<svg id="sennen-icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+					<svg id="sennen-icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+				</button>
+			</div>
 		</div>
 
 		<!-- Mobile Menu -->

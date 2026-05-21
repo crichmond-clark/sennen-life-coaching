@@ -40,9 +40,8 @@ $image_src = sennen_image_url( ltrim( $image, '/' ) );
 		</a>
 
 		<!-- Scroll Indicator -->
-		<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce" style="color: rgba(21,66,18,0.7);">
-			<span class="text-[10px] uppercase font-semibold tracking-widest" style="font-family: var(--font-sans);">Scroll to explore</span>
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+		<div class="mt-8 flex items-center justify-center animate-bounce" style="color: rgba(21,66,18,0.7);" aria-hidden="true">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
 		</div>
 	</div>
 </section>
