@@ -1,16 +1,7 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
-<main class="wp-block-group" id="main-content">
-  <!-- wp:query {"queryId":0,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","sticky":"","inherit":true}} -->
-  <div class="wp-block-query">
-    <!-- wp:post-template -->
-      <!-- wp:post-title {"isLink":true} /-->
-      <!-- wp:post-excerpt /-->
-    <!-- /wp:post-template -->
-  </div>
-  <!-- /wp:query -->
+<main class="flex-grow flex flex-col pt-[72px]" id="main-content">
+  <!-- wp:post-content /-->
 </main>
-<!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

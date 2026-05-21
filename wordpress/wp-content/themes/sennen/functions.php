@@ -9,6 +9,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Load shell renderers (nav + footer).
+require_once get_template_directory() . '/includes/render-shell.php';
+
+/**
+ * Replace block header/footer template parts with exact Sennen renderers.
+ */
+function sennen_render_template_part( string $block_content, array $block ): string {
+	if ( ! isset( $block['attrs']['slug'] ) ) {
+		return $block_content;
+	}
+
+	if ( 'header' === $block['attrs']['slug'] ) {
+		ob_start();
+		sennen_render_nav();
+		return ob_get_clean();
+	}
+
+	if ( 'footer' === $block['attrs']['slug'] ) {
+		ob_start();
+		sennen_render_footer();
+		return ob_get_clean();
+	}
+
+	return $block_content;
+}
+add_filter( 'render_block_core/template-part', 'sennen_render_template_part', 10, 2 );
+
+/**
+ * Add parity body classes matching the Next.js layout shell.
+ */
+function sennen_body_classes( array $classes ): array {
+	$classes[] = 'bg-background';
+	$classes[] = 'text-on-background';
+	$classes[] = 'text-body-md';
+	$classes[] = 'antialiased';
+	$classes[] = 'overflow-x-hidden';
+	$classes[] = 'min-h-screen';
+	$classes[] = 'flex';
+	$classes[] = 'flex-col';
+	return $classes;
+}
+add_filter( 'body_class', 'sennen_body_classes' );
+
 /**
  * Theme setup.
  */
@@ -31,11 +74,21 @@ add_action( 'after_setup_theme', 'sennen_setup' );
 function sennen_enqueue_assets(): void {
 	$theme_version = wp_get_theme()->get( 'Version' );
 
-	// Frontend styles (additive to theme.json).
+	// Parity CSS — compiled from the same Tailwind design system as Next.js.
+	if ( file_exists( get_template_directory() . '/assets/css/sennen-parity.css' ) ) {
+		wp_enqueue_style(
+			'sennen-parity',
+			get_template_directory_uri() . '/assets/css/sennen-parity.css',
+			array(),
+			$theme_version
+		);
+	}
+
+	// Frontend CSS — WordPress-specific overrides (kept minimal).
 	wp_enqueue_style(
 		'sennen-frontend',
 		get_template_directory_uri() . '/assets/css/frontend.css',
-		array(),
+		array( 'sennen-parity' ),
 		$theme_version
 	);
 
@@ -48,6 +101,15 @@ function sennen_enqueue_assets(): void {
 		get_template_directory_uri() . '/assets/css/fonts.css',
 		array(),
 		$theme_version
+	);
+
+	// Frontend JS — nav scroll state, mobile menu, contact form, booking embed.
+	wp_enqueue_script(
+		'sennen-frontend',
+		get_template_directory_uri() . '/assets/js/sennen-frontend.js',
+		array(),
+		$theme_version,
+		true
 	);
 }
 add_action( 'wp_enqueue_scripts', 'sennen_enqueue_assets' );
