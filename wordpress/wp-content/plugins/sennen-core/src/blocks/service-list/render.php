@@ -27,9 +27,9 @@ $services = get_posts(
 
 if ( empty( $services ) ) {
 	if ( current_user_can( 'edit_posts' ) ) {
-		return '<p class="has-text-color" style="color:#72796e">' . esc_html__( 'No services found. Add services in the admin menu → Services.', 'sennen-core' ) . '</p>';
+		echo '<p class="has-text-color" style="color:#72796e">' . esc_html__( 'No services found. Add services in the admin menu → Services.', 'sennen-core' ) . '</p>';
 	}
-	return '';
+	return;
 }
 
 ob_start();
@@ -96,4 +96,4 @@ ob_start();
 	</div>
 </div>
 <?php
-return ob_get_clean();
+echo ob_get_clean();

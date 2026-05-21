@@ -204,4 +204,4 @@ ob_start();
 })();
 </script>
 <?php
-return ob_get_clean();
+echo ob_get_clean();

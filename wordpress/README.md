@@ -33,16 +33,16 @@ docker compose up -d --build
 
 ## Import Existing Content
 
-After setup, import the current Sanity content from the repo's `content/` directory:
+After setup, import the current Sanity content from the repo's `content/` directory. The importer upserts pages/posts, sets Home as the front page, and uses custom Sennen blocks for dynamic sections:
 
 ```bash
-docker compose exec wordpress wp sennen import
+docker compose exec wordpress wp sennen import --allow-root
 ```
 
 Dry-run first to preview:
 
 ```bash
-docker compose exec wordpress wp sennen import --dry-run
+docker compose exec wordpress wp sennen import --dry-run --allow-root
 ```
 
 ## Stop / Reset

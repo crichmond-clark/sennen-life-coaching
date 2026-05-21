@@ -50,13 +50,14 @@ add_action( 'init', 'sennen_core_register_blocks' );
  * Enqueue block editor assets.
  */
 function sennen_core_enqueue_block_editor_assets(): void {
+	$script_path = SENNEN_CORE_PATH . 'assets/js/editor-blocks.js';
+
 	wp_enqueue_script(
-		'sennen-core-blocks',
-		SENNEN_CORE_URL . 'build/blocks.js',
-		array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
-		SENNEN_CORE_VERSION,
+		'sennen-core-editor-blocks',
+		SENNEN_CORE_URL . 'assets/js/editor-blocks.js',
+		array( 'wp-blocks', 'wp-block-editor', 'wp-components', 'wp-element', 'wp-i18n', 'wp-server-side-render' ),
+		file_exists( $script_path ) ? (string) filemtime( $script_path ) : SENNEN_CORE_VERSION,
 		true
 	);
 }
-// Editor JS enqueued conditionally when build/blocks.js exists.
-// add_action( 'enqueue_block_editor_assets', 'sennen_core_enqueue_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'sennen_core_enqueue_block_editor_assets' );

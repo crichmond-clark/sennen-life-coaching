@@ -19,15 +19,13 @@ if ( $use_global_url ) {
 }
 
 if ( empty( $booking_url ) ) {
-	if ( current_user_can( 'manage_options' ) ) {
-		return sprintf(
-			'<div %s><div style="background:#f1eee7;border:2px dashed #c2c9bb;border-radius:4px;padding:var(--wp--preset--spacing--gutter);text-align:center;color:#72796e"><p style="margin:0 0 0.5rem;font-weight:600">%s</p><p style="margin:0;font-size:0.875rem">%s</p></div></div>',
-			wp_kses_data( get_block_wrapper_attributes() ),
-			esc_html__( 'Booking Widget', 'sennen-core' ),
-			esc_html__( 'Add your booking URL in Settings → Sennen or set a URL on this block.', 'sennen-core' )
-		);
-	}
-	return '';
+	echo sprintf(
+		'<div %s><div class="sennen-booking-placeholder"><div class="sennen-booking-placeholder-icon" aria-hidden="true">☉</div><p style="margin:0 0 0.5rem">%s</p><p class="is-style-label-caps" style="margin:0">%s</p></div></div>',
+		wp_kses_data( get_block_wrapper_attributes() ),
+		esc_html__( 'Calendly booking widget will appear here once configured.', 'sennen-core' ),
+		esc_html__( 'Set your booking URL in Settings → Sennen', 'sennen-core' )
+	);
+	return;
 }
 
 // Sanitize the URL and only allow Calendly/TidyCal domains by default.
@@ -36,13 +34,13 @@ $parsed        = wp_parse_url( $booking_url );
 
 if ( ! $parsed || ! in_array( $parsed['host'] ?? '', $allowed_hosts, true ) ) {
 	if ( current_user_can( 'manage_options' ) ) {
-		return sprintf(
+		echo sprintf(
 			'<div %s><div style="background:#ffdad6;border:2px solid #ba1a1a;border-radius:4px;padding:var(--wp--preset--spacing--gutter);text-align:center"><p style="margin:0;color:#93000a">%s</p></div></div>',
 			wp_kses_data( get_block_wrapper_attributes() ),
 			esc_html__( 'Invalid booking URL. Only Calendly and TidyCal domains are allowed.', 'sennen-core' )
 		);
 	}
-	return '';
+	return;
 }
 
 // Enqueue Calendly widget script once.
@@ -79,4 +77,4 @@ ob_start();
 	</script>
 </div>
 <?php
-return ob_get_clean();
+echo ob_get_clean();

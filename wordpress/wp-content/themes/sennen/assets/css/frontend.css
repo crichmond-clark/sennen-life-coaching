@@ -120,6 +120,174 @@
   }
 }
 
+/* --- Imported Next.js-equivalent layouts --- */
+.sennen-section {
+  padding: var(--wp--preset--spacing--section-gap) var(--wp--preset--spacing--container-padding);
+}
+
+.sennen-cover-hero,
+.sennen-texture-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 85vh;
+  margin-top: -72px;
+  padding: 150px var(--wp--preset--spacing--container-padding) var(--wp--preset--spacing--section-gap);
+  background-size: cover;
+  background-position: center;
+}
+
+.sennen-home-hero {
+  min-height: 90vh;
+  background-image:
+    linear-gradient(to bottom, rgba(252, 249, 242, 0.2), var(--wp--preset--color--background)),
+    linear-gradient(rgba(246, 242, 234, 0.3), rgba(246, 242, 234, 0.3)),
+    url('/images/hero.jpg');
+}
+
+.sennen-about-hero {
+  background-image:
+    linear-gradient(to top, var(--wp--preset--color--background), rgba(252, 249, 242, 0.45), transparent),
+    url('/images/about-hero.jpg');
+}
+
+.sennen-texture-hero {
+  min-height: auto;
+  background-color: var(--wp--preset--color--surface-container);
+  background-image:
+    linear-gradient(to bottom, transparent, rgba(252, 249, 242, 0.8)),
+    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e5e2db' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.sennen-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 56rem;
+}
+
+.sennen-hover-image {
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(45, 90, 39, 0.15);
+}
+
+.sennen-hover-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1.04);
+  transition: transform 1.2s ease-out;
+}
+
+.sennen-hover-image:hover img {
+  transform: scale(1);
+}
+
+.sennen-philosophy-card,
+.sennen-booking-card {
+  position: relative;
+  overflow: hidden;
+  padding: var(--wp--preset--spacing--gutter);
+  background: var(--wp--preset--color--surface-container-lowest);
+  border: 1px solid rgba(194, 201, 187, 0.3);
+  border-radius: 1.5rem;
+}
+
+.sennen-card-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  font-family: var(--wp--preset--font-family--serif);
+  font-size: 4rem;
+  line-height: 1;
+  opacity: 0.12;
+}
+
+.sennen-card-lifted {
+  transform: translateY(-2rem);
+}
+
+.sennen-round-image img {
+  border-radius: 999px;
+}
+
+.sennen-booking-grid {
+  position: relative;
+  z-index: 2;
+  margin-top: -5rem;
+  padding: 0 var(--wp--preset--spacing--container-padding) var(--wp--preset--spacing--section-gap);
+}
+
+.sennen-booking-placeholder {
+  display: flex;
+  min-height: 24rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  color: var(--wp--preset--color--on-surface-variant);
+}
+
+.sennen-booking-placeholder-icon {
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--wp--preset--color--surface-container);
+  color: var(--wp--preset--color--primary);
+  font-size: 2rem;
+}
+
+.sennen-faq-list {
+  margin-top: var(--wp--preset--spacing--content-gap);
+  padding-top: var(--wp--preset--spacing--gutter);
+  border-top: 1px solid var(--wp--preset--color--outline-variant);
+}
+
+.sennen-faq-item + .sennen-faq-item {
+  margin-top: var(--wp--preset--spacing--gutter);
+}
+
+.sennen-bespoke-cta {
+  max-width: 48rem;
+  text-align: center;
+}
+
+.wp-block-sennen-service-list .wp-block-column > div,
+.wp-block-sennen-testimonial-list .wp-block-column > div {
+  border-radius: 1.5rem !important;
+  border: 1px solid rgba(194, 201, 187, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wp-block-sennen-service-list .wp-block-column > div:hover,
+.wp-block-sennen-testimonial-list .wp-block-column > div:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 18px 40px -18px rgba(45, 90, 39, 0.25) !important;
+}
+
+@media (max-width: 768px) {
+  .sennen-cover-hero,
+  .sennen-texture-hero {
+    min-height: auto;
+    margin-top: 0;
+    padding-top: var(--wp--preset--spacing--section-gap);
+  }
+
+  .sennen-card-lifted {
+    transform: none;
+  }
+
+  .sennen-booking-grid {
+    margin-top: 0;
+  }
+}
+
 /* --- Focus states --- */
 a:focus-visible,
 button:focus-visible,
