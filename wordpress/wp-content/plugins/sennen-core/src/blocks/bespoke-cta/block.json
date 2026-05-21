@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/bespoke-cta",
+  "title": "Bespoke CTA",
+  "category": "sennen-sections",
+  "description": "Custom inquiry call-to-action section.",
+  "supports": { "html": false, "align": false },
+  "attributes": {},
+  "render": "file:./render.php"
+}

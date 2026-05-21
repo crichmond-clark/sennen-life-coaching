@@ -34,6 +34,24 @@ function sennen_core_register_blocks(): void {
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/home-philosophy' );
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/home-testimonials-section' );
 
+	// Exact About page blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/about-hero' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/about-journey-sections' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/about-philosophy-cards' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/about-gallery' );
+
+	// Exact Services page blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/texture-hero' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/services-philosophy' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/service-cards' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/bespoke-cta' );
+
+	// Exact Testimonials page blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/testimonial-cards' );
+
+	// Exact Booking page blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/booking-contact-grid' );
+
 	// Shared blocks.
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/botanical-divider' );
 

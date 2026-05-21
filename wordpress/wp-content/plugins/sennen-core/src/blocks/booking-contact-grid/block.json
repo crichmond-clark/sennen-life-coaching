@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/booking-contact-grid",
+  "title": "Booking Contact Grid",
+  "category": "sennen-sections",
+  "description": "Two-column grid with booking embed and contact form for the Booking page.",
+  "supports": { "html": false, "align": false },
+  "attributes": {
+    "scheduleHeading": { "type": "string", "default": "Schedule Your Session" },
+    "contactHeading": { "type": "string", "default": "Or send a gentle note" },
+    "faqHeading": { "type": "string", "default": "Good to know" },
+    "faqs": { "type": "array", "default": [] }
+  },
+  "render": "file:./render.php"
+}

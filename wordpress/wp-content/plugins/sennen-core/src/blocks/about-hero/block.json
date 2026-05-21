@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/about-hero",
+  "title": "About Hero",
+  "category": "sennen-sections",
+  "description": "Hero section for the About page with background image, label, heading, and subtitle.",
+  "supports": { "html": false, "align": false },
+  "attributes": {
+    "label": { "type": "string", "default": "The Guide" },
+    "heading": { "type": "string", "default": "Rooted in Grace, Wandering in Spirit" },
+    "subtitle": { "type": "string", "default": "My journey began not with a destination, but with a profound desire to listen." },
+    "imageUrl": { "type": "string", "default": "/images/about-hero.jpg" }
+  },
+  "render": "file:./render.php"
+}

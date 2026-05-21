@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/services-philosophy",
+  "title": "Services Philosophy",
+  "category": "sennen-sections",
+  "description": "Philosophy section with organic image and text for the Services page.",
+  "supports": { "html": false, "align": false },
+  "attributes": {},
+  "render": "file:./render.php"
+}

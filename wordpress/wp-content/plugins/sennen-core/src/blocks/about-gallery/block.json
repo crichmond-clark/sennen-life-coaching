@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/about-gallery",
+  "title": "About Gallery",
+  "category": "sennen-sections",
+  "description": "Gallery section with organic-shaped images for the About page.",
+  "supports": { "html": false, "align": false },
+  "attributes": {},
+  "render": "file:./render.php"
+}

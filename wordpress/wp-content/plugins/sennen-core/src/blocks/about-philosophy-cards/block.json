@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/about-philosophy-cards",
+  "title": "About Philosophy Cards",
+  "category": "sennen-sections",
+  "description": "Three-column philosophy cards with icons for the About page.",
+  "supports": { "html": false, "align": false },
+  "attributes": {
+    "cards": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "body": { "type": "string" },
+          "iconName": { "type": "string" }
+        }
+      }
+    }
+  },
+  "render": "file:./render.php"
+}

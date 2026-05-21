@@ -422,38 +422,33 @@ function sennen_core_build_home_blocks( array $data ): string {
 function sennen_core_build_about_blocks( array $data ): string {
 	$heading  = $data['heroHeading'] ?? 'Rooted in Grace, Wandering in Spirit';
 	$subtitle = $data['heroSubtitle'] ?? 'My journey began not with a destination, but with a profound desire to listen.';
-	$journeys = $data['journeySections'] ?? array();
-	$cards    = $data['philosophyCards'] ?? array();
 
-	$journey_markup = '';
-	foreach ( $journeys as $section ) {
-		$journey_markup .= sprintf(
-			'<!-- wp:group {"align":"wide","className":"sennen-section sennen-journey-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section sennen-journey-section"><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|section-gap"}}} --><div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} --><div class="wp-block-column is-vertically-aligned-center"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"is-style-organic-shape-1 sennen-hover-image"} --><figure class="wp-block-image size-large is-style-organic-shape-1 sennen-hover-image"><img src="/images/journey.jpg" alt="%s"/></figure><!-- /wp:image --></div><!-- /wp:column --><!-- wp:column {"verticalAlignment":"center"} --><div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-lg"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-lg)">%s</h2><!-- /wp:heading --><!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"300","lineHeight":"1.8"},"color":{"text":"#42493e"}}} --><p class="has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-md);font-weight:300;line-height:1.8;white-space:pre-line">%s</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:group -->',
-			esc_attr( $section['heading'] ?? 'Meditation in nature' ),
-			esc_html( $section['heading'] ?? 'The Awakening in Chiang Mai' ),
-			esc_html( $section['body'] ?? '' )
+	// Build journey sections.
+	$journeys = array();
+	foreach ( $data['journeySections'] ?? array() as $section ) {
+		$journeys[] = array(
+			'heading'  => $section['heading'] ?? '',
+			'body'     => $section['body'] ?? '',
+			'imageUrl' => '/images/journey.jpg',
 		);
 	}
+	$journeys_json = wp_json_encode( $journeys );
 
-	$cards_markup = '';
-	foreach ( $cards as $index => $card ) {
-		$cards_markup .= sprintf(
-			'<!-- wp:column {"className":"%s"} --><div class="wp-block-column %s"><!-- wp:group {"className":"is-style-ambient-card sennen-philosophy-card","layout":{"type":"constrained"}} --><div class="wp-block-group is-style-ambient-card sennen-philosophy-card"><!-- wp:paragraph {"className":"sennen-card-icon","style":{"color":{"text":"#2d5a27"}}} --><p class="sennen-card-icon has-text-color" style="color:#2d5a27">%s</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|headline-md"},"color":{"text":"#984623"}}} --><h3 class="wp-block-heading has-text-color" style="color:#984623;font-size:var(--wp--preset--font-size--headline-md)">%s</h3><!-- /wp:heading --><!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"300","lineHeight":"1.7"}}} --><p style="font-size:var(--wp--preset--font-size--body-md);font-weight:300;line-height:1.7">%s</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->',
-			1 === $index ? 'sennen-card-lifted' : '',
-			1 === $index ? 'sennen-card-lifted' : '',
-			esc_html( sennen_core_icon_glyph( $card['iconName'] ?? 'Flower' ) ),
-			esc_html( $card['title'] ?? '' ),
-			esc_html( $card['body'] ?? '' )
+	// Build philosophy cards.
+	$cards = array();
+	foreach ( $data['philosophyCards'] ?? array() as $card ) {
+		$cards[] = array(
+			'title'    => $card['title'] ?? '',
+			'body'     => $card['body'] ?? '',
+			'iconName' => $card['iconName'] ?? 'Flower',
 		);
 	}
+	$cards_json = wp_json_encode( $cards );
 
-	return sprintf(
-		'<!-- wp:group {"align":"full","className":"sennen-cover-hero sennen-about-hero","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-cover-hero sennen-about-hero"><!-- wp:group {"className":"sennen-hero-content","layout":{"type":"constrained"}} --><div class="wp-block-group sennen-hero-content"><!-- wp:paragraph {"align":"center","className":"is-style-label-caps","style":{"color":{"text":"#984623"}}} --><p class="has-text-align-center is-style-label-caps has-text-color" style="color:#984623">The Guide</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|display-xl"},"color":{"text":"#2d5a27"}}} --><h1 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--display-xl)">%s</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300","lineHeight":"1.7"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300;line-height:1.7">%s</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:group -->%s<!-- wp:group {"align":"full","className":"sennen-section sennen-philosophy-cards-section","style":{"color":{"background":"#f6f2ea"}},"layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-section sennen-philosophy-cards-section has-background" style="background-color:#f6f2ea"><!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-lg"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-lg)">My Philosophy</h2><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">Guiding principles for a soulful existence.</p><!-- /wp:paragraph --><!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|gutter"}}} --><div class="wp-block-columns">%s</div><!-- /wp:columns --></div><!-- /wp:group --><!-- wp:group {"align":"wide","className":"sennen-section sennen-gallery-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section sennen-gallery-section"><!-- wp:heading {"textAlign":"center","level":2,"style":{"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27">Fragments of the Journey</h2><!-- /wp:heading --><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|gutter"}}} --><div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"width":"58%%"} --><div class="wp-block-column" style="flex-basis:58%%"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"is-style-organic-shape-2 sennen-hover-image"} --><figure class="wp-block-image size-large is-style-organic-shape-2 sennen-hover-image"><img src="/images/yoga-shala.jpg" alt="Peaceful yoga shala in nature"/></figure><!-- /wp:image --></div><!-- /wp:column --><!-- wp:column {"width":"42%%"} --><div class="wp-block-column" style="flex-basis:42%%"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"is-style-organic-shape-3 sennen-hover-image"} --><figure class="wp-block-image size-large is-style-organic-shape-3 sennen-hover-image"><img src="/images/ceramics.jpg" alt="Ceramics and incense"/></figure><!-- /wp:image --><!-- wp:image {"sizeSlug":"medium","linkDestination":"none","className":"sennen-round-image sennen-hover-image"} --><figure class="wp-block-image size-medium sennen-round-image sennen-hover-image"><img src="/images/meditation.jpg" alt="Connecting with nature"/></figure><!-- /wp:image --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:group -->',
-		esc_html( $heading ),
-		esc_html( $subtitle ),
-		$journey_markup,
-		$cards_markup
-	);
+	return '<!-- wp:sennen/about-hero {"heading":' . wp_json_encode( $heading ) . ',"subtitle":' . wp_json_encode( $subtitle ) . '} /-->' . "\n" .
+		'<!-- wp:sennen/about-journey-sections {"sections":' . $journeys_json . '} /-->' . "\n" .
+		'<!-- wp:sennen/about-philosophy-cards {"cards":' . $cards_json . '} /-->' . "\n" .
+		'<!-- wp:sennen/about-gallery /-->';
 }
 
 /**
@@ -462,7 +457,10 @@ function sennen_core_build_about_blocks( array $data ): string {
  * @return string
  */
 function sennen_core_build_services_page_blocks(): string {
-	return '<!-- wp:group {"align":"full","className":"sennen-texture-hero sennen-services-hero","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-texture-hero sennen-services-hero"><!-- wp:paragraph {"align":"center","className":"is-style-label-caps","style":{"color":{"text":"#984623"}}} --><p class="has-text-align-center is-style-label-caps has-text-color" style="color:#984623">Offerings</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|display-xl"},"color":{"text":"#2d5a27"}}} --><h1 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--display-xl)">Nourish Your Spirit</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">Whether you need a gentle reset or a deep transformative journey, these offerings hold the space for your unwinding. Choose the path that calls to your current season.</p><!-- /wp:paragraph --></div><!-- /wp:group --><!-- wp:group {"align":"wide","className":"sennen-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section"><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|section-gap"}}} --><div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column --><div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"is-style-organic-shape-3 sennen-hover-image"} --><figure class="wp-block-image size-large is-style-organic-shape-3 sennen-hover-image"><img src="/images/tea-ritual.jpg" alt="Hands holding tea bowl in peaceful ritual"/></figure><!-- /wp:image --></div><!-- /wp:column --><!-- wp:column --><div class="wp-block-column"><!-- wp:heading {"level":2,"style":{"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-color" style="color:#2d5a27">Not fixing, just remembering.</h2><!-- /wp:heading --><!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"300","lineHeight":"1.8"},"color":{"text":"#42493e"}}} --><p class="has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-md);font-weight:300;line-height:1.8">My approach does not assume you are broken. Instead, these sessions are designed to help you peel back the layers of conditioning, stress, and noise to remember the wholeness that already resides within you.</p><!-- /wp:paragraph --><!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"300","lineHeight":"1.8"},"color":{"text":"#42493e"}}} --><p class="has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-md);font-weight:300;line-height:1.8">We move slowly, respecting the pace of your nervous system. Every offering is an invitation, never a demand.</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:group --><!-- wp:group {"align":"full","className":"sennen-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-section"><!-- wp:sennen/service-list {"columns":3,"count":3,"showFeatures":true,"buttonText":"Inquire Now","buttonUrl":"/booking"} /--></div><!-- /wp:group --><!-- wp:group {"align":"wide","className":"sennen-section sennen-bespoke-cta","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section sennen-bespoke-cta"><!-- wp:heading {"textAlign":"center","level":2,"style":{"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27">Need something bespoke?</h2><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">I occasionally take on bespoke retreats or group facilitation. If you have a specific vision, let\'s explore it together.</p><!-- /wp:paragraph --><!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons"><!-- wp:button {"className":"is-style-sennen-secondary"} --><div class="wp-block-button is-style-sennen-secondary"><a class="wp-block-button__link wp-element-button" href="/booking">Send an Inquiry</a></div><!-- /wp:button --></div><!-- /wp:buttons --></div><!-- /wp:group -->';
+	return '<!-- wp:sennen/texture-hero {"label":"Offerings","heading":"Nourish Your Spirit","subtitle":"Whether you need a gentle reset or a deep transformative journey, these offerings hold the space for your unwinding. Choose the path that calls to your current season."} /-->' . "\n" .
+		'<!-- wp:sennen/services-philosophy /-->' . "\n" .
+		'<!-- wp:sennen/service-cards {"count":3} /-->' . "\n" .
+		'<!-- wp:sennen/bespoke-cta /-->';
 }
 
 /**
@@ -471,7 +469,8 @@ function sennen_core_build_services_page_blocks(): string {
  * @return string
  */
 function sennen_core_build_testimonials_page_blocks(): string {
-	return '<!-- wp:group {"align":"full","className":"sennen-texture-hero sennen-testimonials-hero","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-texture-hero sennen-testimonials-hero"><!-- wp:paragraph {"align":"center","className":"is-style-label-caps","style":{"color":{"text":"#984623"}}} --><p class="has-text-align-center is-style-label-caps has-text-color" style="color:#984623">Stories of Transformation</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|display-xl"},"color":{"text":"#2d5a27"}}} --><h1 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--display-xl)">What Clients Say</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">Words from those who have walked this path with me. Each story is a testament to the power of presence, compassion, and intentional healing.</p><!-- /wp:paragraph --></div><!-- /wp:group --><!-- wp:group {"align":"wide","className":"sennen-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section"><!-- wp:sennen/testimonial-list {"columns":3,"count":9,"showAvatar":true} /--></div><!-- /wp:group -->';
+	return '<!-- wp:sennen/texture-hero {"label":"Stories of Transformation","heading":"What Clients Say","subtitle":"Words from those who have walked this path with me. Each story is a testament to the power of presence, compassion, and intentional healing."} /-->' . "\n" .
+		'<!-- wp:sennen/testimonial-cards {"count":9} /-->';
 }
 
 /**
@@ -481,31 +480,24 @@ function sennen_core_build_testimonials_page_blocks(): string {
  * @return string
  */
 function sennen_core_build_booking_blocks( array $data ): string {
-	$heading         = $data['heroHeading'] ?? 'Begin Your Journey';
-	$subtitle        = $data['heroSubtitle'] ?? 'Take a deep breath. Inquire about a session below, or simply send a note to connect. I look forward to holding space for you.';
-	$schedule_heading = $data['scheduleHeading'] ?? 'Schedule Your Session';
-	$contact_heading  = $data['contactHeading'] ?? 'Or send a gentle note';
-	$faq_heading      = $data['faqHeading'] ?? 'Good to know';
-	$faqs             = $data['faqs'] ?? array();
+	$heading  = $data['heroHeading'] ?? 'Begin Your Journey';
+	$subtitle = $data['heroSubtitle'] ?? 'Take a deep breath. Inquire about a session below, or simply send a note to connect. I look forward to holding space for you.';
+	$schedule = $data['scheduleHeading'] ?? 'Schedule Your Session';
+	$contact  = $data['contactHeading'] ?? 'Or send a gentle note';
+	$faq_head = $data['faqHeading'] ?? 'Good to know';
+	$faqs     = $data['faqs'] ?? array();
 
-	$faq_markup = '';
-	foreach ( $faqs as $faq ) {
-		$faq_markup .= sprintf(
-			'<!-- wp:group {"className":"sennen-faq-item","layout":{"type":"constrained"}} --><div class="wp-block-group sennen-faq-item"><!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"700"}}} --><h4 class="wp-block-heading" style="font-size:var(--wp--preset--font-size--body-md);font-weight:700">%s</h4><!-- /wp:heading --><!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|body-md","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-md);font-weight:300">%s</p><!-- /wp:paragraph --></div><!-- /wp:group -->',
-			esc_html( $faq['question'] ?? '' ),
-			esc_html( $faq['answer'] ?? '' )
+	if ( empty( $faqs ) ) {
+		$faqs = array(
+			array( 'question' => 'Where do sessions take place?', 'answer' => 'In-person sessions are held at my private shala in Ubud. Virtual sessions take place via Zoom.' ),
+			array( 'question' => 'What is your cancellation policy?', 'answer' => 'I ask for 48 hours notice for a full refund, honoring both your time and mine.' ),
 		);
 	}
 
-	return sprintf(
-		'<!-- wp:group {"align":"full","className":"sennen-texture-hero sennen-booking-hero","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-texture-hero sennen-booking-hero"><!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|display-xl"},"color":{"text":"#2d5a27"}}} --><h1 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--display-xl)">%s</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">%s</p><!-- /wp:paragraph --></div><!-- /wp:group --><!-- wp:group {"align":"wide","className":"sennen-booking-grid","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-booking-grid"><!-- wp:columns {"style":{"spacing":{"blockGap":"var:preset|spacing|section-gap"}}} --><div class="wp-block-columns"><!-- wp:column {"width":"50%%"} --><div class="wp-block-column" style="flex-basis:50%%"><!-- wp:group {"className":"is-style-ambient-card sennen-booking-card","layout":{"type":"constrained"}} --><div class="wp-block-group is-style-ambient-card sennen-booking-card"><!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-md"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-md)">%s</h2><!-- /wp:heading --><!-- wp:sennen/booking-embed {"useGlobalUrl":true,"minHeight":650} /--></div><!-- /wp:group --></div><!-- /wp:column --><!-- wp:column {"width":"50%%"} --><div class="wp-block-column" style="flex-basis:50%%"><!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-md"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-md)">%s</h2><!-- /wp:heading --><!-- wp:sennen/contact-form /--><!-- wp:group {"className":"sennen-faq-list","layout":{"type":"constrained"}} --><div class="wp-block-group sennen-faq-list"><!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|headline-md"},"color":{"text":"#2d5a27"}}} --><h3 class="wp-block-heading has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-md)">%s</h3><!-- /wp:heading -->%s</div><!-- /wp:group --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:group -->',
-		esc_html( $heading ),
-		esc_html( $subtitle ),
-		esc_html( $schedule_heading ),
-		esc_html( $contact_heading ),
-		esc_html( $faq_heading ),
-		$faq_markup
-	);
+	$faqs_json = wp_json_encode( $faqs );
+
+	return '<!-- wp:sennen/texture-hero {"heading":' . wp_json_encode( $heading ) . ',"subtitle":' . wp_json_encode( $subtitle ) . '} /-->' . "\n" .
+		'<!-- wp:sennen/booking-contact-grid {"scheduleHeading":' . wp_json_encode( $schedule ) . ',"contactHeading":' . wp_json_encode( $contact ) . ',"faqHeading":' . wp_json_encode( $faq_head ) . ',"faqs":' . $faqs_json . '} /-->';
 }
 
 /**

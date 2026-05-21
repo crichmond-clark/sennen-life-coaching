@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/service-cards",
+  "title": "Service Cards",
+  "category": "sennen-sections",
+  "description": "Dynamic service package cards from sennen_service CPT.",
+  "supports": { "html": false, "align": false },
+  "attributes": {
+    "count": { "type": "number", "default": 3 }
+  },
+  "render": "file:./render.php"
+}
