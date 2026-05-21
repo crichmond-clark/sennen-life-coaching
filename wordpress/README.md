@@ -81,13 +81,25 @@ docker compose exec wordpress tail -f wp-content/debug.log
 For non-technical content editors:
 
 1. Log into WordPress admin at `/wp-admin`.
-2. Use **Pages** to edit Home, About, Services, Testimonials, and Booking pages.
-3. Use **Services** in the sidebar to manage service cards.
-4. Use **Testimonials** in the sidebar to manage testimonial cards.
-5. Use **Appearance → Editor** to edit the header, footer, and site-wide layout.
-6. Use **Settings → Sennen** to update the booking URL and contact email.
+2. Use **Services** in the sidebar to manage service packages (title, price, duration, features, description).
+3. Use **Testimonials** in the sidebar to manage testimonial cards (author name, author title, quote).
+4. Use **Settings → Sennen** to update the booking URL and contact email.
+5. Page copy (headings, subtitles, body text) can be edited through each page's block attributes in the editor.
 
-All page sections are built with blocks and patterns. You can drag, reorder, duplicate, and remove sections from the block editor.
+**Important:** Page layouts are locked. The exact section blocks (hero, philosophy, cards, etc.) maintain visual parity with the original Next.js frontend. Do NOT unlock or rearrange blocks unless you accept that parity may break.
+
+What the client can safely edit:
+- Service packages (title, price, duration, features, description)
+- Testimonials (author, title, quote)
+- Page headings and body text through block attributes
+- Booking URL and contact email through Settings
+- Site name and tagline through Settings → General
+
+What should NOT be changed without developer support:
+- Block order on pages
+- Adding/removing section blocks
+- Theme CSS or template files
+- Plugin code
 
 ## Production Hardening
 

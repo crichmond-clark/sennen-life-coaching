@@ -306,4 +306,80 @@
 			return null;
 		}
 	} );
+
+	// --- Exact Section Blocks (read-only in editor) ---
+
+	var sectionBlocks = [
+		'sennen/home-hero',
+		'sennen/home-philosophy',
+		'sennen/home-testimonials-section',
+		'sennen/about-hero',
+		'sennen/about-journey-sections',
+		'sennen/about-philosophy-cards',
+		'sennen/about-gallery',
+		'sennen/texture-hero',
+		'sennen/services-philosophy',
+		'sennen/service-cards',
+		'sennen/bespoke-cta',
+		'sennen/testimonial-cards',
+		'sennen/booking-contact-grid'
+	];
+
+	var sectionTitles = {
+		'sennen/home-hero': 'Home Hero',
+		'sennen/home-philosophy': 'Home Philosophy',
+		'sennen/home-testimonials-section': 'Home Testimonials',
+		'sennen/about-hero': 'About Hero',
+		'sennen/about-journey-sections': 'About Journey',
+		'sennen/about-philosophy-cards': 'About Philosophy Cards',
+		'sennen/about-gallery': 'About Gallery',
+		'sennen/texture-hero': 'Texture Hero',
+		'sennen/services-philosophy': 'Services Philosophy',
+		'sennen/service-cards': 'Service Cards',
+		'sennen/bespoke-cta': 'Bespoke CTA',
+		'sennen/testimonial-cards': 'Testimonial Cards',
+		'sennen/booking-contact-grid': 'Booking Contact Grid'
+	};
+
+	var sectionIcons = {
+		'sennen/home-hero': 'cover-image',
+		'sennen/home-philosophy': 'book',
+		'sennen/home-testimonials-section': 'format-quote',
+		'sennen/about-hero': 'cover-image',
+		'sennen/about-journey-sections': 'schedule',
+		'sennen/about-philosophy-cards': 'grid-view',
+		'sennen/about-gallery': 'format-gallery',
+		'sennen/texture-hero': 'cover-image',
+		'sennen/services-philosophy': 'book',
+		'sennen/service-cards': 'grid-view',
+		'sennen/bespoke-cta': 'megaphone',
+		'sennen/testimonial-cards': 'format-quote',
+		'sennen/booking-contact-grid': 'calendar-alt'
+	};
+
+	sectionBlocks.forEach( function( blockName ) {
+		if ( getBlockType( blockName ) ) {
+			return;
+		}
+
+		registerBlockType( blockName, {
+			apiVersion: 3,
+			title: sectionTitles[ blockName ] || blockName,
+			icon: sectionIcons[ blockName ] || 'layout',
+			category: 'sennen-sections',
+			supports: {
+				html: false,
+				align: false,
+				anchor: false,
+				reusable: false,
+				lock: true
+			},
+			edit: function( props ) {
+				return preview( blockName, props.attributes );
+			},
+			save: function() {
+				return null;
+			}
+		} );
+	} );
 } )( window.wp );

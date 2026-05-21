@@ -154,6 +154,13 @@ function sennen_core_import_pages( bool $dry_run ): ?int {
 		if ( 'home' === $page['slug'] ) {
 			$home_page_id = $page_id;
 		}
+
+		// Lock page template to prevent accidental layout changes.
+		if ( $page_id ) {
+			update_post_meta( $page_id, '_wp_page_template', 'blank' );
+			update_post_meta( $page_id, 'sennen_layout_locked', true );
+		}
+
 		WP_CLI::log( '  ✓ Upserted page: ' . $page['title'] );
 	}
 
