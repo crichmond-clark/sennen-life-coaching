@@ -1,40 +1,70 @@
 /* Sennen Life Coaching — editor-only visual parity */
 
+/*
+ * The parity CSS (sennen-parity.css) and fonts are loaded via add_editor_style().
+ * This file only contains editor-specific overrides that compensate for
+ * Gutenberg's wrapper markup and the iframe environment.
+ */
+
+/* --- CSS variables must be available in editor iframe --- */
+:root {
+	--spacing-container-padding: 1.5rem;
+	--spacing-section-gap: 6rem;
+	--spacing-gutter: 2rem;
+}
+
+/* --- Gutenberg block wrapper resets --- */
+.editor-styles-wrapper .wp-block {
+	max-width: none;
+}
+
+/* Ensure section blocks fill the editor canvas. */
+.editor-styles-wrapper [class*="sennen-"][class*="-hero"],
+.editor-styles-wrapper [data-type^="sennen/"] {
+	max-width: none;
+}
+
+/* Remove extra padding Gutenberg adds inside blocks. */
+.editor-styles-wrapper .block-editor-block-list__block[data-type^="sennen/"] {
+	padding: 0;
+	margin: 0;
+}
+
 /* --- Match frontend organic shapes in editor --- */
 .editor-styles-wrapper .is-style-organic-shape-1 img,
 .editor-styles-wrapper .is-style-organic-shape-1.wp-block-image img {
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+	border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
 }
 
 .editor-styles-wrapper .is-style-organic-shape-2 img,
 .editor-styles-wrapper .is-style-organic-shape-2.wp-block-image img {
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
 }
 
 .editor-styles-wrapper .is-style-organic-shape-3 img,
 .editor-styles-wrapper .is-style-organic-shape-3.wp-block-image img {
-  border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+	border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
 }
 
 /* --- Ambient card in editor --- */
 .editor-styles-wrapper .is-style-ambient-card {
-  box-shadow: 0 10px 30px -10px rgba(152, 70, 35, 0.1);
-  border-radius: 4px;
+	box-shadow: 0 10px 30px -10px rgba(152, 70, 35, 0.1);
+	border-radius: 4px;
 }
 
 /* --- Textured surface in editor --- */
 .editor-styles-wrapper .is-style-textured-surface {
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e5e2db' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e5e2db' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* --- Label caps in editor --- */
 .editor-styles-wrapper .is-style-label-caps {
-  font-family: var(--wp--preset--font-family--sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+	font-family: var(--wp--preset--font-family--sans);
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
 }
 
 /* --- Ensure Serif headings render in editor --- */
@@ -44,5 +74,29 @@
 .editor-styles-wrapper h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
-  font-family: var(--wp--preset--font-family--serif);
+	font-family: var(--wp--preset--font-family--serif);
+}
+
+/* --- Editor placeholder when ServerSideRender fails --- */
+.editor-styles-wrapper .sennen-editor-placeholder {
+	padding: 2rem;
+	text-align: center;
+	background: var(--wp--preset--color--surface-container, #f6f2ea);
+	border: 1px dashed rgba(152, 70, 35, 0.3);
+	border-radius: 1rem;
+	color: var(--wp--preset--color--on-surface-variant, #42493e);
+	font-style: italic;
+}
+
+/* --- Form inputs in editor --- */
+.editor-styles-wrapper .sennen-contact-form input,
+.editor-styles-wrapper .sennen-contact-form select,
+.editor-styles-wrapper .sennen-contact-form textarea {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 1px solid rgba(194, 201, 187, 0.5);
+	border-radius: 0.5rem;
+	background: white;
+	font-family: var(--wp--preset--font-family--sans);
+	font-size: 0.875rem;
 }

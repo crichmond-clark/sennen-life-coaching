@@ -59,6 +59,10 @@ function sennen_setup(): void {
 	// Block theme supports.
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'editor-styles' );
+
+	// Load the parity CSS into the editor so it matches the frontend.
+	// add_editor_style() is called later (in sennen_enqueue_assets) because
+	// it needs to run after the CSS file exists.
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'post-thumbnails' );
@@ -92,7 +96,9 @@ function sennen_enqueue_assets(): void {
 		$theme_version
 	);
 
-	// Editor styles.
+	// Editor styles — parity CSS + fonts so editor matches frontend.
+	add_editor_style( 'assets/css/sennen-parity.css' );
+	add_editor_style( 'assets/css/fonts.css' );
 	add_editor_style( 'assets/css/editor.css' );
 
 	// Self-hosted fonts.
