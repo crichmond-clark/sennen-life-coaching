@@ -4,11 +4,8 @@
   "name": "sennen/botanical-divider",
   "title": "Botanical Divider",
   "category": "sennen-sections",
-  "description": "A decorative botanical SVG divider to separate page sections.",
-  "supports": {
-    "anchor": true,
-    "spacing": { "margin": true, "padding": true }
-  },
+  "description": "Decorative botanical SVG divider between page sections.",
+  "supports": { "html": false, "align": false },
   "attributes": {
     "variant": { "type": "string", "default": "up" },
     "opacity": { "type": "number", "default": 30 }

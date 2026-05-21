@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/home-hero",
+  "title": "Home Hero",
+  "category": "sennen-sections",
+  "description": "Full-height hero section for the home page with background image, overlay, heading, and CTA.",
+  "supports": {
+    "html": false,
+    "align": false
+  },
+  "attributes": {
+    "label": { "type": "string", "default": "Find Your Center" },
+    "heading": { "type": "string", "default": "Rooted in Grace" },
+    "subtitle": { "type": "string", "default": "A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived." },
+    "ctaText": { "type": "string", "default": "Begin Your Journey" },
+    "ctaUrl": { "type": "string", "default": "/booking/" },
+    "imageUrl": { "type": "string", "default": "/images/hero.jpg" }
+  },
+  "render": "file:./render.php"
+}

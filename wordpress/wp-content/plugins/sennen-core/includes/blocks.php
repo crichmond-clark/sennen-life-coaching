@@ -29,14 +29,19 @@ add_filter( 'block_categories_all', 'sennen_core_block_category', 10, 1 );
  * Register all custom blocks.
  */
 function sennen_core_register_blocks(): void {
+	// Exact Home page blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/home-hero' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/home-philosophy' );
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/home-testimonials-section' );
+
+	// Shared blocks.
+	register_block_type( SENNEN_CORE_PATH . 'src/blocks/botanical-divider' );
+
 	// Service list block.
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/service-list' );
 
 	// Testimonial list block.
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/testimonial-list' );
-
-	// Botanical divider block.
-	register_block_type( SENNEN_CORE_PATH . 'src/blocks/botanical-divider' );
 
 	// Booking embed block.
 	register_block_type( SENNEN_CORE_PATH . 'src/blocks/booking-embed' );

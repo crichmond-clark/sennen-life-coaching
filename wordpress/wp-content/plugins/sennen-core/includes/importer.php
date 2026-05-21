@@ -387,21 +387,30 @@ function sennen_core_portable_text_to_blocks( array $portable_blocks ): string {
  * @return string
  */
 function sennen_core_build_home_blocks( array $data ): string {
-	$heading     = $data['heroHeading'] ?? 'Rooted in Grace';
-	$subtitle    = $data['heroSubtitle'] ?? 'A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived.';
-	$cta         = $data['heroCtaText'] ?? 'Begin Your Journey';
-	$philosophy  = $data['philosophyHeading'] ?? 'The Art of Slowing Down.';
-	$body_blocks = $data['philosophyBody'] ?? array();
+	$heading  = $data['heroHeading'] ?? 'Rooted in Grace';
+	$subtitle = $data['heroSubtitle'] ?? 'A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived.';
+	$cta      = $data['heroCtaText'] ?? 'Begin Your Journey';
 
-	return sprintf(
-		'<!-- wp:group {"align":"full","className":"sennen-cover-hero sennen-home-hero","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-cover-hero sennen-home-hero"><!-- wp:group {"className":"sennen-hero-content","layout":{"type":"constrained"}} --><div class="wp-block-group sennen-hero-content"><!-- wp:paragraph {"align":"center","className":"is-style-label-caps","style":{"color":{"text":"#2d5a27"}}} --><p class="has-text-align-center is-style-label-caps has-text-color" style="color:#2d5a27">Find Your Center</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|display-xl"},"color":{"text":"#2d5a27"}}} --><h1 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--display-xl)">%s</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">%s</p><!-- /wp:paragraph --><!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons"><!-- wp:button {"className":"is-style-sennen-primary"} --><div class="wp-block-button is-style-sennen-primary"><a class="wp-block-button__link wp-element-button" href="/booking">%s</a></div><!-- /wp:button --></div><!-- /wp:buttons --></div><!-- /wp:group --></div><!-- /wp:group -->%s<!-- wp:group {"align":"wide","className":"sennen-section sennen-philosophy-section","layout":{"type":"constrained"}} --><div class="wp-block-group alignwide sennen-section sennen-philosophy-section"><!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":"var:preset|spacing|section-gap"}}} --><div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"45%%"} --><div class="wp-block-column is-vertically-aligned-center" style="flex-basis:45%%"><!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-lg"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-lg)">%s</h2><!-- /wp:heading -->%s<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button {"className":"is-style-sennen-secondary"} --><div class="wp-block-button is-style-sennen-secondary"><a class="wp-block-button__link wp-element-button" href="/about">Our Story</a></div><!-- /wp:button --></div><!-- /wp:buttons --></div><!-- /wp:column --><!-- wp:column {"verticalAlignment":"center","width":"55%%"} --><div class="wp-block-column is-vertically-aligned-center" style="flex-basis:55%%"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"is-style-organic-shape-1 sennen-hover-image"} --><figure class="wp-block-image size-large is-style-organic-shape-1 sennen-hover-image"><img src="/images/philosophy.jpg" alt="Woman in peaceful meditation in a natural setting"/></figure><!-- /wp:image --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:group --><!-- wp:group {"align":"full","className":"sennen-section sennen-testimonials-shell","style":{"color":{"background":"#f6f2ea"}},"layout":{"type":"constrained"}} --><div class="wp-block-group alignfull sennen-section sennen-testimonials-shell has-background" style="background-color:#f6f2ea"><!-- wp:sennen/botanical-divider {"opacity":30} /--><!-- wp:paragraph {"align":"center","className":"is-style-label-caps","style":{"color":{"text":"#984623"}}} --><p class="has-text-align-center is-style-label-caps has-text-color" style="color:#984623">Testimonials</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"var:preset|font-size|headline-lg"},"color":{"text":"#2d5a27"}}} --><h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#2d5a27;font-size:var(--wp--preset--font-size--headline-lg)">What Clients Say</h2><!-- /wp:heading --><!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"var:preset|font-size|body-lg","fontWeight":"300"},"color":{"text":"#42493e"}}} --><p class="has-text-align-center has-text-color" style="color:#42493e;font-size:var(--wp--preset--font-size--body-lg);font-weight:300">Stories from those who have walked this path with me.</p><!-- /wp:paragraph --><!-- wp:sennen/testimonial-list {"columns":3,"count":3} /--></div><!-- /wp:group -->',
-		esc_html( $heading ),
-		esc_html( $subtitle ),
-		esc_html( $cta ),
-		'<!-- wp:sennen/botanical-divider {"opacity":30} /-->',
-		esc_html( $philosophy ),
-		sennen_core_portable_text_to_blocks( $body_blocks )
-	);
+	$philosophy_heading = $data['philosophyHeading'] ?? 'The Art of Slowing Down.';
+	$body_blocks        = $data['philosophyBody'] ?? array();
+
+	// Extract philosophy paragraphs from portable text.
+	$philosophy_paras = array();
+	foreach ( $body_blocks as $block ) {
+		$text = '';
+		foreach ( $block['children'] ?? array() as $child ) {
+			$text .= $child['text'] ?? '';
+		}
+		if ( '' !== trim( $text ) ) {
+			$philosophy_paras[] = $text;
+		}
+	}
+	$philosophy_json = wp_json_encode( $philosophy_paras );
+
+	return '<!-- wp:sennen/home-hero {"heading":' . wp_json_encode( $heading ) . ',"subtitle":' . wp_json_encode( $subtitle ) . ',"ctaText":' . wp_json_encode( $cta ) . '} /-->' . "\n" .
+		'<!-- wp:sennen/botanical-divider {"opacity":30} /-->' . "\n" .
+		'<!-- wp:sennen/home-philosophy {"heading":' . wp_json_encode( $philosophy_heading ) . ',"bodyParagraphs":' . $philosophy_json . '} /-->' . "\n" .
+		'<!-- wp:sennen/home-testimonials-section {"count":3} /-->';
 }
 
 /**

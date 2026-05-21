@@ -28,6 +28,7 @@ require_once SENNEN_CORE_PATH . 'includes/meta.php';
 require_once SENNEN_CORE_PATH . 'includes/settings.php';
 require_once SENNEN_CORE_PATH . 'includes/contact.php';
 require_once SENNEN_CORE_PATH . 'includes/importer.php';
+require_once SENNEN_CORE_PATH . 'includes/render-helpers.php';
 require_once SENNEN_CORE_PATH . 'includes/blocks.php';
 
 /**

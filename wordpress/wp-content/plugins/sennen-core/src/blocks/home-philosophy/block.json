@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "sennen/home-philosophy",
+  "title": "Home Philosophy",
+  "category": "sennen-sections",
+  "description": "Philosophy section on the home page with text content and organic-shaped image.",
+  "supports": { "html": false, "align": false },
+  "attributes": {
+    "heading": { "type": "string", "default": "The Art of Slowing Down." },
+    "bodyParagraphs": { "type": "array", "default": [] },
+    "ctaText": { "type": "string", "default": "Our Story" },
+    "ctaUrl": { "type": "string", "default": "/about/" },
+    "imageUrl": { "type": "string", "default": "/images/philosophy.jpg" }
+  },
+  "render": "file:./render.php"
+}
