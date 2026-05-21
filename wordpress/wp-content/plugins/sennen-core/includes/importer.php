@@ -46,7 +46,7 @@ function sennen_core_import_command( array $args, array $assoc_args ): void {
  * @param bool $dry_run Whether to perform a dry run.
  */
 function sennen_core_import_site_settings( bool $dry_run ): void {
-	$file = SENNEN_CORE_PATH . '../../content/site-settings.json';
+	$file = ABSPATH . 'content/site-settings.json';
 
 	if ( ! file_exists( $file ) ) {
 		WP_CLI::warning( 'site-settings.json not found.' );
@@ -86,7 +86,7 @@ function sennen_core_import_pages( bool $dry_run ): void {
 	);
 
 	foreach ( $pages as $file_name => $default_title ) {
-		$file = SENNEN_CORE_PATH . '../../content/' . $file_name;
+		$file = ABSPATH . 'content/' . $file_name;
 
 		if ( ! file_exists( $file ) ) {
 			WP_CLI::warning( "$file_name not found." );
@@ -128,7 +128,7 @@ function sennen_core_import_pages( bool $dry_run ): void {
  * @param bool $dry_run Whether to perform a dry run.
  */
 function sennen_core_import_services( bool $dry_run ): void {
-	$file = SENNEN_CORE_PATH . '../../content/services.json';
+	$file = ABSPATH . 'content/services.json';
 
 	if ( ! file_exists( $file ) ) {
 		WP_CLI::warning( 'services.json not found.' );
@@ -177,7 +177,7 @@ function sennen_core_import_services( bool $dry_run ): void {
  * @param bool $dry_run Whether to perform a dry run.
  */
 function sennen_core_import_testimonials( bool $dry_run ): void {
-	$file = SENNEN_CORE_PATH . '../../content/testimonials.json';
+	$file = ABSPATH . 'content/testimonials.json';
 
 	if ( ! file_exists( $file ) ) {
 		WP_CLI::warning( 'testimonials.json not found.' );

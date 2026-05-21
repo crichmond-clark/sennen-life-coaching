@@ -13,7 +13,8 @@ services:
       - '3306:3306'
 
   wordpress:
-    image: wordpress:6.8-php8.2-apache
+    build: .
+    image: sennen-wordpress:local
     restart: unless-stopped
     ports:
       - '8080:80'
@@ -29,6 +30,7 @@ services:
     volumes:
       - ./wp-content/themes/sennen:/var/www/html/wp-content/themes/sennen
       - ./wp-content/plugins/sennen-core:/var/www/html/wp-content/plugins/sennen-core
+      - ../content:/var/www/html/content
       - wp_uploads:/var/www/html/wp-content/uploads
     depends_on:
       - db

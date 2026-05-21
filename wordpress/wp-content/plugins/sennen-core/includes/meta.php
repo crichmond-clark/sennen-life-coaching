@@ -17,7 +17,6 @@ function sennen_core_register_meta(): void {
 	$service_meta = array(
 		'_sennen_service_price'      => 'string',
 		'_sennen_service_duration'   => 'string',
-		'_sennen_service_features'   => 'array',
 		'_sennen_service_sort_order' => 'integer',
 	);
 
@@ -35,6 +34,26 @@ function sennen_core_register_meta(): void {
 			)
 		);
 	}
+
+	// Service features (array meta with schema).
+	register_post_meta(
+		'sennen_service',
+		'_sennen_service_features',
+		array(
+			'show_in_rest'  => array(
+				'schema' => array(
+					'items' => array(
+						'type' => 'string',
+					),
+				),
+			),
+			'single'        => true,
+			'type'          => 'array',
+			'auth_callback' => function () {
+				return current_user_can( 'edit_posts' );
+			},
+		)
+	);
 
 	// Testimonial meta.
 	$testimonial_meta = array(
