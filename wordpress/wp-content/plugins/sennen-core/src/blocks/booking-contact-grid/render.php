@@ -20,6 +20,24 @@ if ( empty( $faqs ) ) {
 $booking_url = sennen_get_booking_url();
 $nonce = wp_create_nonce( 'sennen_contact_form' );
 
+$faq_schema = array(
+	'@context'   => 'https://schema.org',
+	'@type'      => 'FAQPage',
+	'mainEntity' => array_map(
+		static function ( array $faq ): array {
+			return array(
+				'@type'          => 'Question',
+				'name'           => wp_strip_all_tags( $faq['question'] ?? '' ),
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => wp_strip_all_tags( $faq['answer'] ?? '' ),
+				),
+			);
+		},
+		$faqs
+	),
+);
+
 // Booking embed.
 $booking_html = '';
 if ( $booking_url ) {
@@ -29,6 +47,7 @@ if ( $booking_url ) {
 }
 ?>
 
+<script type="application/ld+json"><?php echo wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ); ?></script>
 <section class="max-w-7xl mx-auto w-full relative z-20 -mt-20" style="padding-top: 4rem; padding-bottom: 4rem; padding-left: var(--spacing-container-padding); padding-right: var(--spacing-container-padding);">
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
 		<!-- Booking Embed Column -->

@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { Flower, Droplet, Leaf, Sun, Heart } from 'lucide-react'
 import { getAbout } from '@/sanity/fetch'
 import { urlFor } from '@/sanity/image'
+import { buildPageMetadata, routes } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'About',
   description: 'Learn about Sennen\'s journey from corporate life to spiritual coaching. Discover the philosophy behind Rooted in Grace.',
-}
+  path: routes.about,
+})
 
 export const revalidate = 60
 

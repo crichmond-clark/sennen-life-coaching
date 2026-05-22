@@ -30,14 +30,14 @@ $icon_svgs = array(
 	<div class="max-w-7xl mx-auto w-full">
 		<div class="text-center mb-16 space-y-4">
 			<h2 class="text-headline-lg" style="color: var(--color-primary);">My Philosophy</h2>
-			<p class="text-body-lg font-light" style="color: var(--color-on-surface-variant);">Guiding principles for a soulful existence.</p>
+			<p class="text-body-lg font-light max-w-2xl mx-auto text-center" style="color: var(--color-on-surface-variant);">Guiding principles for a soulful existence.</p>
 		</div>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
 			<?php foreach ( $cards as $i => $card ) :
 				$icon_svg = $icon_svgs[ $card['iconName'] ?? 'Flower' ] ?? $icon_svgs['Flower'];
 				$offset   = 1 === $i ? 'md:-translate-y-8' : '';
 			?>
-				<div class="p-8 rounded-2xl shadow-sm border overflow-hidden group relative transition-shadow duration-300 hover:shadow-md <?php echo esc_attr( $offset ); ?>" style="background-color: var(--color-surface-container-lowest); border-color: rgba(194,201,187,0.3);">
+				<div class="p-8 rounded-2xl shadow-sm border overflow-hidden group relative transition-all duration-300 hover:shadow-md hover:-translate-y-2 <?php echo esc_attr( $offset ); ?>" style="background-color: var(--color-surface-container-lowest); border-color: rgba(194,201,187,0.3);">
 					<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity" style="color: var(--color-primary);">
 						<?php echo $icon_svg; ?>
 					</div>
@@ -45,6 +45,7 @@ $icon_svgs = array(
 					<p class="text-body-md font-light leading-relaxed relative z-10" style="color: var(--color-on-surface);">
 						<?php echo esc_html( $card['body'] ?? '' ); ?>
 					</p>
+					<div class="absolute top-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity" style="background: linear-gradient(to right, rgba(21,66,18,0.2), var(--color-primary), rgba(21,66,18,0.2));"></div>
 				</div>
 			<?php endforeach; ?>
 		</div>

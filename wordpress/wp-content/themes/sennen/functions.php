@@ -244,32 +244,142 @@ function sennen_disable_custom_colors(): void {
 add_action( 'after_setup_theme', 'sennen_disable_custom_colors' );
 
 /**
- * Output basic Open Graph meta tags.
+ * Get a concise, stable SEO description for the current request.
  */
-function sennen_opengraph_meta(): void {
+function sennen_get_seo_description(): string {
+	$default = __( 'A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived.', 'sennen' );
+
 	if ( is_singular() ) {
-		global $post;
-		$excerpt = has_excerpt( $post->ID )
-			? wp_strip_all_tags( get_the_excerpt( $post->ID ) )
-			: wp_trim_words( wp_strip_all_tags( $post->post_content ), 30 );
+		$post = get_queried_object();
 
-		echo '<meta property="og:title" content="' . esc_attr( get_the_title() ) . '">' . "\n";
-		echo '<meta property="og:description" content="' . esc_attr( $excerpt ) . '">' . "\n";
-		echo '<meta property="og:url" content="' . esc_url( get_permalink() ) . '">' . "\n";
+		if ( $post instanceof WP_Post ) {
+			if ( has_excerpt( $post->ID ) ) {
+				return wp_strip_all_tags( get_the_excerpt( $post->ID ) );
+			}
 
-		if ( has_post_thumbnail( $post->ID ) ) {
-			echo '<meta property="og:image" content="' . esc_url( get_the_post_thumbnail_url( $post->ID, 'large' ) ) . '">' . "\n";
+			$content = trim( wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
+			if ( '' !== $content ) {
+				return wp_trim_words( $content, 30, '' );
+			}
 		}
-	} else {
-		echo '<meta property="og:title" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
-		echo '<meta property="og:description" content="' . esc_attr( get_bloginfo( 'description' ) ) . '">' . "\n";
-		echo '<meta property="og:url" content="' . esc_url( home_url() ) . '">' . "\n";
 	}
 
-	echo '<meta property="og:type" content="website">' . "\n";
-	echo '<meta property="og:site_name" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
+	$slug_descriptions = array(
+		'about'        => __( "Learn about Sennen's journey from corporate life to spiritual coaching. Discover the philosophy behind Rooted in Grace.", 'sennen' ),
+		'services'     => __( 'Explore coaching offerings from grounding sessions to deep transformative mentorship. Find the path that calls to your current season.', 'sennen' ),
+		'testimonials' => __( 'Hear from clients who have walked the path of transformation and healing.', 'sennen' ),
+		'booking'      => __( 'Schedule a coaching session or send an inquiry. In-person sessions in Ubud and virtual sessions via Zoom available.', 'sennen' ),
+	);
+
+	if ( is_front_page() || is_home() ) {
+		return $default;
+	}
+
+	if ( is_page() ) {
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		if ( isset( $slug_descriptions[ $slug ] ) ) {
+			return $slug_descriptions[ $slug ];
+		}
+	}
+
+	return get_bloginfo( 'description' ) ?: $default;
 }
-add_action( 'wp_head', 'sennen_opengraph_meta' );
+
+/**
+ * Get the preferred URL for the current request.
+ */
+function sennen_get_canonical_url(): string {
+	if ( is_singular() ) {
+		return get_permalink();
+	}
+
+	if ( is_front_page() || is_home() ) {
+		return home_url( '/' );
+	}
+
+	if ( is_post_type_archive() ) {
+		$archive_url = get_post_type_archive_link( get_query_var( 'post_type' ) );
+		if ( $archive_url ) {
+			return $archive_url;
+		}
+	}
+
+	return home_url( add_query_arg( array(), $GLOBALS['wp']->request ?? '' ) );
+}
+
+/**
+ * Output page metadata, social metadata, and site-level JSON-LD.
+ */
+function sennen_seo_meta(): void {
+	$title       = wp_get_document_title();
+	$description = sennen_get_seo_description();
+	$url         = sennen_get_canonical_url();
+	$site_name   = get_bloginfo( 'name' ) ?: 'Sennen Life Coaching';
+	$tagline     = get_bloginfo( 'description' ) ?: 'Rooted in Grace';
+	$image       = get_template_directory_uri() . '/assets/images/og-image.jpg';
+
+	if ( is_singular() ) {
+		$post = get_queried_object();
+		if ( $post instanceof WP_Post && has_post_thumbnail( $post->ID ) ) {
+			$image = get_the_post_thumbnail_url( $post->ID, 'large' );
+		}
+	}
+
+	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( $title ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $description ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+	echo '<meta property="og:type" content="' . esc_attr( is_singular( 'post' ) ? 'article' : 'website' ) . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( $site_name ) . '">' . "\n";
+	echo '<meta property="og:locale" content="en_US">' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+	echo '<meta name="twitter:title" content="' . esc_attr( $title ) . '">' . "\n";
+	echo '<meta name="twitter:description" content="' . esc_attr( $description ) . '">' . "\n";
+
+	if ( $image ) {
+		echo '<meta property="og:image" content="' . esc_url( $image ) . '">' . "\n";
+		echo '<meta name="twitter:image" content="' . esc_url( $image ) . '">' . "\n";
+	}
+
+	$schema = array(
+		array(
+			'@context'    => 'https://schema.org',
+			'@type'       => 'ProfessionalService',
+			'@id'         => home_url( '/#organization' ),
+			'name'        => $site_name,
+			'url'         => home_url( '/' ),
+			'slogan'      => $tagline,
+			'description' => $description,
+			'areaServed'  => array( 'Ubud', 'Online' ),
+			'serviceType' => array( 'Life coaching', 'Spiritual coaching', 'Mindful wellness coaching' ),
+		),
+		array(
+			'@context'  => 'https://schema.org',
+			'@type'     => 'WebSite',
+			'@id'       => home_url( '/#website' ),
+			'name'      => $site_name,
+			'url'       => home_url( '/' ),
+			'publisher' => array(
+				'@id' => home_url( '/#organization' ),
+			),
+		),
+	);
+
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'sennen_seo_meta' );
+
+/**
+ * Keep low-value internal WordPress surfaces out of the index.
+ */
+function sennen_robots_directives( array $robots ): array {
+	if ( is_search() || is_404() ) {
+		$robots['noindex'] = true;
+	}
+
+	return $robots;
+}
+add_filter( 'wp_robots', 'sennen_robots_directives' );
 
 /**
  * Add skip-to-content link for keyboard accessibility.

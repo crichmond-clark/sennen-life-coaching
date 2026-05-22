@@ -1,30 +1,37 @@
 import { MetadataRoute } from 'next'
+import { canonicalUrl, routes } from '@/lib/seo'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://sennenlifecoaching.com'
-  
+  const lastModified = new Date()
+
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: canonicalUrl(routes.home),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
+      url: canonicalUrl(routes.about),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
+      url: canonicalUrl(routes.services),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/booking`,
-      lastModified: new Date(),
+      url: canonicalUrl(routes.testimonials),
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: canonicalUrl(routes.booking),
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,
     },

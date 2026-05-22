@@ -2,11 +2,13 @@ import type { Metadata } from 'next'
 import { getSiteSettings, getBooking } from '@/sanity/fetch'
 import { BookingEmbed } from '@/components/BookingEmbed'
 import { ContactForm } from '@/components/ContactForm'
+import { buildPageMetadata, faqPageJsonLd, routes } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Book a Session',
   description: 'Schedule a coaching session or send an inquiry. In-person sessions in Ubud and virtual sessions via Zoom available.',
-}
+  path: routes.booking,
+})
 
 export const revalidate = 60
 
@@ -25,8 +27,14 @@ export default async function BookingPage() {
     },
   ]
 
+  const faqJsonLd = faqPageJsonLd(faqs)
+
   return (
     <div className="w-full relative flex flex-col flex-grow">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }}
+      />
       {/* Header Section */}
       <section className="bg-surface-container py-section-gap px-container-padding relative overflow-hidden -mt-[72px] pt-[150px]">
         {/* Background Texture */}

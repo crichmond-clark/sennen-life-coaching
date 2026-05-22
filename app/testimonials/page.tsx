@@ -2,11 +2,13 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
 import { getHome } from '@/sanity/fetch'
+import { buildPageMetadata, routes } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Testimonials',
   description: 'Hear from clients who have walked the path of transformation and healing.',
-}
+  path: routes.testimonials,
+})
 
 export const revalidate = 60
 
