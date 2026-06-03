@@ -2,13 +2,11 @@
 import { render } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import BotanicalDivider from '../components/BotanicalDivider.astro'
-import TestimonialCards from '../components/TestimonialCards.astro'
-import { getPage, getSiteSettings, getTestimonials } from '../lib/content'
+import { getPage, getSiteSettings } from '../lib/content'
 
 const settings = await getSiteSettings()
 const home = await getPage('home')
 const { Content } = await render(home)
-const testimonials = await getTestimonials()
 const sections = home.data.sections ?? {}
 ---
 
@@ -33,9 +31,8 @@ const sections = home.data.sections ?? {}
           </a>
         )}
 
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/70 animate-bounce">
-          <span class="text-[10px] uppercase font-sans font-semibold tracking-widest">Scroll to explore</span>
-          <svg class="w-5 h-5 font-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <div class="mt-8 flex items-center justify-center text-primary/70 animate-bounce" aria-hidden="true">
+          <svg class="w-6 h-6 font-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M19 12l-7 7-7-7"></path></svg>
         </div>
       </div>
     </section>
@@ -68,6 +65,6 @@ const sections = home.data.sections ?? {}
       </div>
     </section>
 
-    <TestimonialCards testimonials={testimonials} />
+    <!-- Testimonials section hidden until real, approved testimonials are ready. -->
   </div>
 </BaseLayout>

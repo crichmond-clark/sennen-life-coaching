@@ -4,12 +4,31 @@ This tracks what is still needed after the static Astro migration before calling
 
 ## Table of Contents
 
+- [Current Status](#current-status)
+- [Production-Ready Priorities](#production-ready-priorities)
 - [Branch and Review](#branch-and-review)
 - [Content Cleanup](#content-cleanup)
 - [Booking and Contact](#booking-and-contact)
 - [Assets and Branding](#assets-and-branding)
 - [SEO and Launch Checks](#seo-and-launch-checks)
 - [Deployment](#deployment)
+
+## Current Status
+
+- Astro migration is on `feature/astro-static-migration`.
+- Testimonials are intentionally hidden from the nav and home page until real, approved testimonials are ready.
+- The testimonials route file is parked as `src/pages/_testimonials.astro` so it can be restored later without publishing `/testimonials` now.
+- The home hero scroll indicator uses the spacing pattern from the WordPress branch: it sits in the hero content flow instead of being absolutely pinned to the bottom.
+
+## Production-Ready Priorities
+
+1. Add the real booking URL.
+2. Decide contact handling and test it end-to-end.
+3. Replace or approve every public image.
+4. Replace placeholder/AI-sounding copy with Sennen-approved copy.
+5. Keep testimonials disabled until quotes are real and approved.
+6. Run final mobile/desktop QA on a deploy preview.
+7. Confirm metadata, sitemap, robots, favicon, and OG image before production deploy.
 
 ## Branch and Review
 
@@ -22,7 +41,7 @@ This tracks what is still needed after the static Astro migration before calling
 
 - [ ] Replace placeholder/AI-sounding copy with real Sennen-approved copy.
 - [ ] Confirm service names, descriptions, durations, prices, and CTAs in `src/content/services/*.yaml`.
-- [ ] Confirm testimonials are real and approved before publishing them.
+- [ ] Keep testimonials hidden until real quotes are approved; then restore `src/pages/_testimonials.astro` to `src/pages/testimonials.astro` and re-add the nav link.
 - [ ] Update page SEO titles/descriptions in `src/content/pages/*.md`.
 - [ ] Check all page copy for claims that need softening or substantiation.
 
@@ -51,8 +70,8 @@ This tracks what is still needed after the static Astro migration before calling
   - [ ] `/`
   - [ ] `/about`
   - [ ] `/services`
-  - [ ] `/testimonials`
   - [ ] `/booking`
+- [ ] Confirm `/testimonials` is not linked or generated until testimonials are approved.
 - [ ] Confirm `robots.txt` and generated sitemap URLs point to `https://sennenlifecoaching.com`.
 - [ ] Check metadata/OG preview with a sharing debugger after deployment.
 
