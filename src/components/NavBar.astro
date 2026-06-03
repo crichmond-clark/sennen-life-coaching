@@ -1,0 +1,114 @@
+---
+interface SocialLink {
+  platform: string
+  url: string
+}
+
+interface Props {
+  brandName: string
+  bookingUrl?: string
+  socialLinks?: SocialLink[]
+}
+
+const { brandName, bookingUrl = '/booking' } = Astro.props
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Testimonials', href: '/testimonials' },
+  { name: 'Booking', href: '/booking' },
+]
+const ctaHref = bookingUrl || '/booking'
+---
+
+<nav id="site-nav" class="fixed w-full z-50 transition-all duration-300 top-0 bg-transparent backdrop-blur-sm py-6">
+  <div class="flex justify-between items-center w-full px-container-padding max-w-7xl mx-auto">
+    <a href="/" class="text-headline-md text-primary tracking-tight z-10 relative hover:opacity-80 transition-opacity">
+      {brandName}
+    </a>
+
+    <div class="hidden md:flex items-center gap-gutter">
+      {navLinks.map((link) => {
+        const isActive = pathname === link.href
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              'text-label-caps tracking-widest uppercase transition-colors duration-300',
+              isActive ? 'text-primary border-b-2 border-secondary font-bold' : 'text-on-surface hover:text-secondary',
+            ]}
+          >
+            {link.name}
+          </a>
+        )
+      })}
+    </div>
+
+    <a
+      href={ctaHref}
+      class="hidden md:inline-flex items-center justify-center px-6 py-3 bg-primary text-on-primary text-label-caps uppercase tracking-widest rounded-full shadow-[0_4px_14px_0_rgba(21,66,18,0.2)] hover:bg-surface-tint hover:-translate-y-0.5 transition-all duration-300 scale-95 active:scale-95"
+    >
+      Begin Your Journey
+    </a>
+
+    <button id="mobile-menu-toggle" class="md:hidden text-primary p-2 z-10 relative" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation">
+      <svg id="menu-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-lg border-b border-outline-variant/20 shadow-lg px-container-padding py-8 flex-col gap-6 md:hidden">
+    {navLinks.map((link) => {
+      const isActive = pathname === link.href
+      return (
+        <a
+          href={link.href}
+          class:list={[
+            'text-body-lg text-center transition-colors duration-300',
+            isActive ? 'text-secondary font-bold' : 'text-on-surface',
+          ]}
+        >
+          {link.name}
+        </a>
+      )
+    })}
+    <a href={ctaHref} class="mt-4 flex items-center justify-center px-8 py-4 bg-primary text-on-primary text-label-caps uppercase tracking-widest rounded-full">
+      Begin Your Journey
+    </a>
+  </div>
+</nav>
+
+<script>
+  const nav = document.querySelector('#site-nav')
+  const toggle = document.querySelector<HTMLButtonElement>('#mobile-menu-toggle')
+  const mobileMenu = document.querySelector('#mobile-menu')
+  const menuIcon = document.querySelector('#menu-icon')
+  const closeIcon = document.querySelector('#close-icon')
+
+  const updateScrollState = () => {
+    if (!nav) return
+    const scrolledClasses = ['bg-background/90', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-outline-variant/20', 'py-4']
+    const topClasses = ['bg-transparent', 'backdrop-blur-sm', 'py-6']
+
+    if (window.scrollY > 20) {
+      nav.classList.remove(...topClasses)
+      nav.classList.add(...scrolledClasses)
+    } else {
+      nav.classList.remove(...scrolledClasses)
+      nav.classList.add(...topClasses)
+    }
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true'
+    toggle.setAttribute('aria-expanded', String(!isOpen))
+    mobileMenu?.classList.toggle('hidden', isOpen)
+    mobileMenu?.classList.toggle('flex', !isOpen)
+    menuIcon?.classList.toggle('hidden', !isOpen)
+    closeIcon?.classList.toggle('hidden', isOpen)
+  })
+
+  window.addEventListener('scroll', updateScrollState, { passive: true })
+  updateScrollState()
+</script>

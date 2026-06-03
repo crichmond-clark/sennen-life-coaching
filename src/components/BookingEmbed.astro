@@ -1,0 +1,32 @@
+---
+interface Props {
+  bookingUrl?: string
+}
+
+const { bookingUrl = '' } = Astro.props
+---
+
+{bookingUrl ? (
+  <>
+    <div
+      class="calendly-inline-widget"
+      data-url={bookingUrl}
+      style="min-width: 320px; height: 700px;"
+    ></div>
+    <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </>
+) : (
+  <div class="flex flex-col items-center justify-center py-16 text-center space-y-4">
+    <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center">
+      <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+      </svg>
+    </div>
+    <p class="text-body-md text-on-surface-variant font-light">
+      Booking will be available once the Calendly URL is configured.
+    </p>
+    <a href="#contact" class="text-label-caps text-secondary tracking-widest uppercase border-b border-secondary pb-1 hover:text-primary hover:border-primary transition-colors">
+      Send an inquiry instead
+    </a>
+  </div>
+)}

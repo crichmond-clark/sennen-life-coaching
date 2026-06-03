@@ -1,0 +1,81 @@
+---
+interface Props {
+  contactEmail: string
+  formAction?: string
+}
+
+const { contactEmail, formAction = '' } = Astro.props
+const usesMailto = !formAction
+const action = usesMailto ? `mailto:${contactEmail}` : formAction
+const method = usesMailto ? 'get' : 'post'
+const inquiryTypes = ['General Question', 'Bespoke Retreat', 'Virtual Session', 'In-Person Session']
+---
+
+<form id="contact" action={action} method={method} enctype={usesMailto ? undefined : 'application/x-www-form-urlencoded'} class="space-y-6">
+  {!usesMailto && <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />}
+
+  <div class="space-y-2">
+    <label for="name" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      minlength="2"
+      required
+      class="w-full bg-transparent border-b py-3 text-body-lg text-on-surface focus:outline-none transition-colors border-outline-variant focus:border-primary"
+      placeholder="Your full name"
+    />
+  </div>
+
+  <div class="space-y-2">
+    <label for="email" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      class="w-full bg-transparent border-b py-3 text-body-lg text-on-surface focus:outline-none transition-colors border-outline-variant focus:border-primary"
+      placeholder="hello@example.com"
+    />
+  </div>
+
+  <div class="space-y-2">
+    <label for="inquiryType" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Inquiry Type</label>
+    <select
+      id="inquiryType"
+      name="inquiryType"
+      class="w-full bg-transparent border-b border-outline-variant py-3 text-body-lg text-on-surface focus:outline-none focus:border-primary transition-colors appearance-none"
+    >
+      {inquiryTypes.map((type) => <option value={type}>{type}</option>)}
+    </select>
+  </div>
+
+  <div class="space-y-2">
+    <label for="message" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Message</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      minlength="10"
+      required
+      class="w-full bg-transparent border-b py-3 text-body-lg text-on-surface focus:outline-none transition-colors resize-none border-outline-variant focus:border-primary"
+      placeholder="Share a bit about what brings you here..."
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-surface-container-highest text-primary hover:bg-secondary-container hover:text-on-secondary rounded-full text-label-caps uppercase tracking-widest transition-all duration-300"
+  >
+    <span>{usesMailto ? 'Open Email' : 'Send Message'}</span>
+    <svg class="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12 3 21l18-9L3 3l3 9Zm0 0h8"></path>
+    </svg>
+  </button>
+
+  {usesMailto && (
+    <p class="text-body-md text-on-surface-variant font-light">
+      This temporary static form opens your email client. Add a form provider URL in <code>src/content/settings/site.yaml</code> for direct submissions.
+    </p>
+  )}
+</form>
