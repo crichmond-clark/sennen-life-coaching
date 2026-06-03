@@ -33,6 +33,9 @@ function socialIcon(platform: SocialLink['platform']) {
     <div class="flex flex-col items-center md:items-start gap-4 mb-4 md:mb-0">
       <span class="text-headline-md text-primary tracking-tight opacity-90 hover:opacity-100 transition-opacity">{brandName}</span>
       <span class="text-body-md text-on-surface-variant font-light">© {year} {brandName}. {tagline}.</span>
+      <a href="https://askeladd.dev" target="_blank" rel="noopener noreferrer" class="text-label-caps text-on-surface-variant tracking-widest uppercase hover:text-primary transition-colors">
+        Website by Askeladd
+      </a>
     </div>
 
     {visibleLinks.length > 0 && (
