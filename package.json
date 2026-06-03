@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro sync && tsc --noEmit"
+    "preview": "npm run build && wrangler dev",
+    "check": "astro sync && tsc --noEmit",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.6.1",
     "@astrojs/sitemap": "latest",
     "@tailwindcss/vite": "4.1.11",
     "astro": "latest",
@@ -17,6 +20,10 @@
   },
   "devDependencies": {
     "@types/node": "^22",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "wrangler": "^4.97.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
