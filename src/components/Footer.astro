@@ -29,13 +29,10 @@ function socialIcon(platform: SocialLink['platform']) {
 ---
 
 <footer class="bg-surface-container border-t border-outline-variant rounded-t-xl mt-auto relative z-10 w-full">
-  <div class="flex flex-col md:flex-row justify-between items-center w-full px-container-padding py-12 gap-8 max-w-7xl mx-auto shadow-sm">
-    <div class="flex flex-col items-center md:items-start gap-4 mb-4 md:mb-0">
+  <div class="flex flex-col w-full px-container-padding py-12 gap-8 max-w-7xl mx-auto shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
       <span class="text-headline-md text-primary tracking-tight opacity-90 hover:opacity-100 transition-opacity">{brandName}</span>
-      <span class="text-body-md text-on-surface-variant font-light">© {year} {brandName}. {tagline}.</span>
-    </div>
 
-    <div class="flex flex-col md:items-end gap-6">
       {visibleLinks.length > 0 && (
         <div class="flex items-center gap-6">
           {visibleLinks.map((link) => (
@@ -51,6 +48,10 @@ function socialIcon(platform: SocialLink['platform']) {
           ))}
         </div>
       )}
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+      <span class="text-body-md text-on-surface-variant font-light">© {year} {brandName}. {tagline}.</span>
       <a href="https://askeladd.dev" target="_blank" rel="noopener noreferrer" class="text-label-caps text-on-surface-variant tracking-widest uppercase hover:text-primary transition-colors">
         Website by Askeladd
       </a>
