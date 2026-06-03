@@ -35,7 +35,7 @@ const services = defineCollection({
     slug: z.string().min(1),
     summary: z.string().min(1),
     duration: z.string().min(1),
-    price: z.string().min(1),
+    price: z.string().default(''),
     format: z.string().min(1),
     sortOrder: z.number().int(),
     features: z.array(z.string().min(1)).default([]),

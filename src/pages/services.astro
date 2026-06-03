@@ -40,8 +40,8 @@ const sections = page.data.sections as any
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-primary-fixed to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <h3 class="text-headline-md text-primary mb-2 relative z-10">{service.data.title}</h3>
             <div class="flex items-baseline gap-2 mb-6 relative z-10">
-              <span class="text-headline-md text-secondary">{service.data.price}</span>
-              <span class="text-label-caps text-on-surface-variant tracking-widest uppercase">/ {service.data.duration}</span>
+              {service.data.price && <span class="text-headline-md text-secondary">{service.data.price}</span>}
+              <span class="text-label-caps text-on-surface-variant tracking-widest uppercase">{service.data.price ? `/ ${service.data.duration}` : service.data.duration}</span>
             </div>
             <p class="text-body-md text-on-surface font-light mb-8 relative z-10 flex-grow">{service.data.summary}</p>
             <div class="h-px w-full bg-outline-variant/50 mb-8"></div>
