@@ -8,7 +8,7 @@ const { contactEmail, formAction = '' } = Astro.props
 const usesMailto = !formAction
 const action = usesMailto ? `mailto:${contactEmail}` : formAction
 const method = usesMailto ? 'get' : 'post'
-const inquiryTypes = ['General Question', 'Bespoke Retreat', 'Virtual Session', 'In-Person Session']
+const inquiryTypes = ['General enquiry', 'Online coaching', 'In-person coaching', 'Ongoing support']
 ---
 
 <form id="contact" action={action} method={method} enctype={usesMailto ? undefined : 'application/x-www-form-urlencoded'} class="space-y-6">
@@ -40,7 +40,7 @@ const inquiryTypes = ['General Question', 'Bespoke Retreat', 'Virtual Session', 
   </div>
 
   <div class="space-y-2">
-    <label for="inquiryType" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Inquiry Type</label>
+    <label for="inquiryType" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Enquiry type</label>
     <select
       id="inquiryType"
       name="inquiryType"
@@ -59,7 +59,7 @@ const inquiryTypes = ['General Question', 'Bespoke Retreat', 'Virtual Session', 
       minlength="10"
       required
       class="w-full bg-transparent border-b py-3 text-body-lg text-on-surface focus:outline-none transition-colors resize-none border-outline-variant focus:border-primary"
-      placeholder="Share a bit about what brings you here..."
+      placeholder="Share a little about what you are looking for..."
     ></textarea>
   </div>
 
@@ -67,7 +67,7 @@ const inquiryTypes = ['General Question', 'Bespoke Retreat', 'Virtual Session', 
     type="submit"
     class="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 bg-surface-container-highest text-primary hover:bg-secondary-container hover:text-on-secondary rounded-full text-label-caps uppercase tracking-widest transition-all duration-300"
   >
-    <span>{usesMailto ? 'Open Email' : 'Send Message'}</span>
+    <span>{usesMailto ? 'Open email' : 'Send enquiry'}</span>
     <svg class="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12 3 21l18-9L3 3l3 9Zm0 0h8"></path>
     </svg>

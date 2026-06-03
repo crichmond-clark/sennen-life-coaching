@@ -1,20 +1,20 @@
 ---
 title: Services
-seoTitle: Services | Sennen Life Coaching
-seoDescription: Explore coaching offerings from grounding sessions to deeper mentorship with Sennen Life Coaching.
+seoTitle: Coaching Services | Sennen Life Coaching
+seoDescription: One-to-one coaching in the UK and online for structure, motivation, recovery support and getting life back on track.
 hero:
-  eyebrow: Offerings
-  heading: Nourish Your Spirit
-  subtitle: Whether you need a gentle reset or a deep transformative journey, these offerings hold the space for your unwinding. Choose the path that calls to your current season.
+  eyebrow: Coaching support
+  heading: Support that meets you where you are
+  subtitle: Flexible one-to-one coaching for people who want help with motivation, organisation, recovery, routine and moving forward.
 sections:
-  philosophyHeading: Not fixing, just remembering.
+  philosophyHeading: Practical help without judgement
   philosophyBody:
-    - My approach does not assume you are broken. Instead, these sessions are designed to help you peel back the layers of conditioning, stress, and noise to remember the wholeness that already resides within you.
-    - We move slowly, respecting the pace of your nervous system. Every offering is an invitation, never a demand.
+    - Coaching is a space to slow things down, talk honestly and turn vague intentions into manageable next steps. You do not need to have everything worked out before getting in touch.
+    - Sessions can focus on routines, confidence, boundaries, accountability, rebuilding after addiction, or finding your way through a difficult period. If coaching is not the right fit, Sennen will be clear about that.
   philosophyImage: /images/tea-ritual.jpg
-  philosophyImageAlt: Hands holding tea bowl in peaceful ritual
-  customHeading: Need something bespoke?
-  customBody: I occasionally take on bespoke retreats or group facilitation. If you have a specific vision, let's explore it together.
-  customCtaText: Send an Inquiry
+  philosophyImageAlt: Calm moment with a cup of tea
+  customHeading: Not sure what you need?
+  customBody: Send a short enquiry and Sennen can suggest the most suitable next step. There is no pressure to commit to a package straight away.
+  customCtaText: Make an enquiry
   customCtaHref: /booking
 ---

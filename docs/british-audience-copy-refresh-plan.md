@@ -171,25 +171,18 @@ Main safety concern is claims risk: avoid implying therapy, medical treatment, g
 
 ## 12. Open Questions
 
-1. What is Sennen’s actual coaching niche?
-   - life transitions
-   - confidence/self-worth
-   - burnout/stress
-   - relationships
-   - career change
-   - spiritual/wellbeing coaching
-   - something else
-2. Is she based in the UK, and does she offer in-person sessions?
-3. Should pricing be public? If yes, what are the actual GBP prices?
-4. What credentials/training can be mentioned?
-5. Should “Rooted in Grace” remain as the tagline?
-6. Should the voice be:
-   - warm and professional
-   - gentle and reflective
-   - practical and direct
-   - slightly spiritual but grounded
-7. What should the primary CTA say?
-   - Book a free consultation
-   - Arrange a call
-   - Make an enquiry
-   - Start with a conversation
+Resolved direction from user:
+
+1. Sennen helps people who are struggling with depression, addiction recovery, organisation, motivation, and getting life back on track.
+2. Sessions are available in person in the UK and online.
+3. Pricing should be enquiry-only for now.
+4. Sennen has a BSc in Psychology.
+5. The tone should be less spiritual.
+6. Primary CTA chosen for the first copy pass: “Make an enquiry”.
+
+Remaining launch questions:
+
+1. Confirm the exact UK in-person location or service area.
+2. Confirm whether the site should mention depression/addiction directly on the homepage or keep that language softer.
+3. Confirm contact email and form provider.
+4. Confirm Calendly or alternative booking/enquiry process.

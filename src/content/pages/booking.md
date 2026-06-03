@@ -1,12 +1,12 @@
 ---
-title: Book a Session
-seoTitle: Book a Session | Sennen Life Coaching
-seoDescription: Schedule a coaching session or send an inquiry to Sennen Life Coaching.
+title: Make an Enquiry
+seoTitle: Make an Enquiry | Sennen Life Coaching
+seoDescription: Enquire about in-person or online coaching with Sennen Life Coaching.
 hero:
-  heading: Begin Your Journey
-  subtitle: Take a deep breath. Inquire about a session below, or simply send a note to connect. I look forward to holding space for you.
+  heading: Start with a simple enquiry
+  subtitle: If you are interested in working together, send a short message about what you are looking for. Sennen will reply with the next step.
 sections:
-  scheduleHeading: Schedule Your Session
-  contactHeading: Or send a gentle note
+  scheduleHeading: Arrange a conversation
+  contactHeading: Send an enquiry
   faqHeading: Good to know
 ---

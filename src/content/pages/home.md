@@ -1,24 +1,24 @@
 ---
 title: Home
-seoTitle: Sennen Life Coaching | Rooted in Grace
-seoDescription: A calm, supportive coaching space for people navigating change.
+seoTitle: Sennen Life Coaching | Practical support to get back on track
+seoDescription: Practical, compassionate life coaching in the UK and online for people rebuilding routine, motivation and confidence.
 hero:
-  eyebrow: Find Your Center
-  heading: Rooted in Grace
-  subtitle: A sanctuary for spiritual alignment, mindful wellness, and the slow-living philosophy. Breathe deeply, you have arrived.
+  eyebrow: Life coaching in person and online
+  heading: Practical support to get back on track
+  subtitle: One-to-one coaching for people who feel stuck, overwhelmed, low in motivation, or ready to rebuild after a difficult period.
   primaryCta:
-    text: Begin Your Journey
+    text: Make an enquiry
     href: /booking
   image: /images/hero.jpg
-  imageAlt: Serene natural retreat with lush greenery and warm light
+  imageAlt: Calm outdoor setting with natural light
 sections:
-  philosophyHeading: The Art of Slowing Down.
+  philosophyHeading: Small steps. Clear routines. Steady progress.
   philosophyImage: /images/philosophy.jpg
-  philosophyImageAlt: Woman in peaceful meditation in natural setting
-  storyCtaText: Our Story
+  philosophyImageAlt: Quiet moment outdoors in nature
+  storyCtaText: About the approach
   storyCtaHref: /about
 ---
 
-In a world that constantly demands more, we offer a space to simply be. Our philosophy is rooted in the earth, drawing inspiration from the tactile textures of nature and the gentle rhythm of the tides.
+When life has become hard to manage, even simple things can start to feel too much. Coaching gives you a calm, structured space to look at what is going on, decide what matters now, and build a way forward one step at a time.
 
-Here, every breath is intentional, every movement is unhurried. We believe true luxury is found in connection—to oneself, to the environment, and to the present moment.
+Sennen works with people who struggle with organisation, motivation, low mood, addiction recovery, or feeling generally off track. The focus is practical and supportive: routines, confidence, accountability, and realistic changes that fit your life.
