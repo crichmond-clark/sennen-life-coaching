@@ -24,7 +24,7 @@ const faqs = await getFaqs('booking')
       <div class="bg-surface-container-lowest p-8 md:p-12 rounded-3xl shadow-lg border border-outline-variant/30 space-y-12">
         <div>
           <h2 class="text-headline-md text-primary mb-6">{sections.contactHeading}</h2>
-          <ContactForm contactEmail={settings.contactEmail} formAction={settings.formAction} />
+          <ContactForm contactEmail={settings.contactEmail} formAction={settings.formAction} web3FormsAccessKey={settings.web3FormsAccessKey} />
         </div>
 
         {faqs.length > 0 && (

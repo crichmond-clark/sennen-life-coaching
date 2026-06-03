@@ -54,8 +54,9 @@ Edit `src/content/settings/site.yaml` for:
 - tagline
 - site URL
 - contact email
-- Calendly booking URL
+- optional booking URL
 - contact form provider endpoint
+- Web3Forms access key
 - social links
 
 Empty social link URLs are hidden in the footer.
@@ -66,15 +67,21 @@ The site is fully static, so it does not include a backend email API.
 
 Options:
 
-1. Add a Formspree/Basin/Getform endpoint to `formAction` in `src/content/settings/site.yaml`.
-2. Leave `formAction` empty to use the current `mailto:` fallback.
-3. If hosting on Netlify, adapt `src/components/ContactForm.astro` for Netlify Forms.
+1. Leave `formAction` empty to use the current `mailto:` fallback.
+2. For Web3Forms, create a form at [web3forms.com](https://web3forms.com), then update `src/content/settings/site.yaml`:
+
+   ```yaml
+   formAction: "https://api.web3forms.com/submit"
+   web3FormsAccessKey: "your-access-key"
+   ```
+
+3. Other static providers can be used by setting `formAction` to their endpoint.
 
 ## Booking
 
-Add a Calendly URL to `bookingUrl` in `src/content/settings/site.yaml`.
+The MVP uses an enquiry-only booking flow. Calendar booking is intentionally hidden for now.
 
-If `bookingUrl` is empty, the booking panel shows a fallback message and links to the contact form.
+If calendar booking is needed later, restore the `BookingEmbed` section on `src/pages/booking.astro` and add a Calendly URL to `bookingUrl` in `src/content/settings/site.yaml`.
 
 ## Commands
 

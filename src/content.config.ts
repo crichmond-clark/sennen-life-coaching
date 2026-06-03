@@ -64,6 +64,7 @@ const settings = defineCollection({
     contactEmail: z.email(),
     bookingUrl: z.string().default(''),
     formAction: z.string().default(''),
+    web3FormsAccessKey: z.string().default(''),
     socialLinks: z
       .array(
         z.object({

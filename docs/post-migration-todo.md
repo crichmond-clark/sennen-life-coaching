@@ -50,7 +50,7 @@ This tracks what is still needed after the static Astro migration before calling
 - [ ] Add the real Calendly URL to `bookingUrl` in `src/content/settings/site.yaml`.
 - [ ] Choose contact handling:
   - [ ] Keep `mailto:` fallback temporarily, or
-  - [ ] Add a Formspree/Basin/Getform endpoint to `formAction`.
+  - [ ] Add Web3Forms endpoint and access key to `formAction` / `web3FormsAccessKey`.
 - [ ] Send a test enquiry through the chosen contact flow.
 - [ ] Confirm the public contact email is correct.
 

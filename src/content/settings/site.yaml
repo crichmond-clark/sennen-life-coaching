@@ -4,6 +4,7 @@ siteUrl: https://sennenlifecoaching.com
 contactEmail: hello@sennenlifecoaching.com
 bookingUrl: ""
 formAction: ""
+web3FormsAccessKey: ""
 socialLinks:
   - platform: Instagram
     url: ""

@@ -2,17 +2,22 @@
 interface Props {
   contactEmail: string
   formAction?: string
+  web3FormsAccessKey?: string
 }
 
-const { contactEmail, formAction = '' } = Astro.props
+const { contactEmail, formAction = '', web3FormsAccessKey = '' } = Astro.props
 const usesMailto = !formAction
+const usesWeb3Forms = formAction.includes('web3forms.com')
 const action = usesMailto ? `mailto:${contactEmail}` : formAction
 const method = usesMailto ? 'get' : 'post'
 const inquiryTypes = ['General enquiry', 'Online coaching', 'In-person coaching', 'Ongoing support']
 ---
 
 <form id="contact" action={action} method={method} enctype={usesMailto ? undefined : 'application/x-www-form-urlencoded'} class="space-y-6">
-  {!usesMailto && <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />}
+  {!usesMailto && <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />}
+  {usesWeb3Forms && web3FormsAccessKey && <input type="hidden" name="access_key" value={web3FormsAccessKey} />}
+  {usesWeb3Forms && <input type="hidden" name="subject" value="New Sennen Life Coaching enquiry" />}
+  {usesWeb3Forms && <input type="hidden" name="from_name" value="Sennen Life Coaching website" />}
 
   <div class="space-y-2">
     <label for="name" class="text-label-caps text-on-surface-variant uppercase tracking-widest">Name</label>
