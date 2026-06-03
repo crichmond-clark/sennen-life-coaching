@@ -1,5 +1,7 @@
 # Sennen Life Coaching Website — Implementation Plan
 
+> **Superseded:** this was the original Next.js + Sanity implementation plan. The project has since been migrated to a static Astro architecture. Use `docs/astro-static-migration-plan.md` and `README.md` as the current source of truth.
+
 ## 1. Problem Statement
 
 Sennen needs a beautiful, professional life coaching website that she can maintain herself without developer assistance. The design direction is established ("Bali Soul" design system) and a Next.js + Tailwind boilerplate has been generated via Stitch/AI Studio. We need to turn that boilerplate into a production-ready site with a CMS, real images, booking integration, and proper branding.

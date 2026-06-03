@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BotanicalDivider from '../components/BotanicalDivider.astro'
+import { getPage, getSiteSettings } from '../lib/content'
+
+const settings = await getSiteSettings()
+const home = await getPage('home')
+const { Content } = await render(home)
+const sections = home.data.sections ?? {}
+---
+
+<BaseLayout title={home.data.seoTitle} description={home.data.seoDescription} settings={settings}>
+  <div class="relative w-full flex-grow flex flex-col">
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden -mt-[72px]">
+      <div class="absolute inset-0 z-0">
+        <img src={home.data.hero.image ?? '/images/hero.jpg'} alt={home.data.hero.imageAlt ?? ''} class="w-full h-full object-cover object-center" loading="eager" />
+        <div class="absolute inset-0 bg-surface-container-highest/30 backdrop-blur-[2px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+      </div>
+
+      <div class="relative z-10 text-center px-container-padding max-w-4xl mx-auto flex flex-col items-center gap-content-gap mt-20">
+        <div class="space-y-6">
+          {home.data.hero.eyebrow && <span class="block text-label-caps text-primary tracking-[0.3em] uppercase">{home.data.hero.eyebrow}</span>}
+          <h1 class="text-display-xl text-primary drop-shadow-sm leading-tight">{home.data.hero.heading}</h1>
+          <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto font-light">{home.data.hero.subtitle}</p>
+        </div>
+        {home.data.hero.primaryCta && (
+          <a href={home.data.hero.primaryCta.href} class="inline-flex items-center justify-center px-8 py-4 bg-secondary text-on-secondary text-label-caps uppercase tracking-widest rounded-full shadow-[0_8px_24px_0_rgba(152,70,35,0.25)] hover:bg-tertiary hover:-translate-y-1 transition-all duration-300">
+            {home.data.hero.primaryCta.text}
+          </a>
+        )}
+
+        <div class="mt-8 flex items-center justify-center text-primary/70 animate-bounce" aria-hidden="true">
+          <svg class="w-6 h-6 font-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M19 12l-7 7-7-7"></path></svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="w-full h-24 flex justify-center items-center opacity-30 my-10 relative">
+      <BotanicalDivider />
+    </div>
+
+    <section class="py-section-gap px-container-padding flex-grow flex items-center">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center w-full">
+        <div class="md:col-span-5 md:col-start-2 space-y-8 z-10 relative">
+          <h2 class="text-headline-lg text-primary">{sections.philosophyHeading}</h2>
+          <div class="space-y-4 text-body-lg text-on-surface-variant leading-relaxed font-light">
+            <Content />
+          </div>
+          <a href={String(sections.storyCtaHref ?? '/about')} class="inline-flex items-center gap-2 text-secondary text-label-caps uppercase tracking-widest hover:text-tertiary transition-colors group mt-4">
+            <span>{sections.storyCtaText ?? 'Our Story'}</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0-5 5m5-5H6"></path></svg>
+          </a>
+        </div>
+
+        <div class="md:col-span-5 md:col-start-8 mt-12 md:mt-0 relative group">
+          <div class="aspect-[4/5] relative organic-shape-1 overflow-hidden shadow-[0_20px_40px_-15px_rgba(45,90,39,0.15)] transform transition-transform duration-700 ease-out">
+            <img src={String(sections.philosophyImage ?? '/images/philosophy.jpg')} alt={String(sections.philosophyImageAlt ?? '')} class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-[1200ms]" loading="lazy" />
+            <div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+          </div>
+          <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary-container rounded-full mix-blend-multiply blur-2xl opacity-60"></div>
+          <div class="absolute -top-8 -right-8 w-40 h-40 bg-primary-fixed rounded-full mix-blend-multiply blur-3xl opacity-40"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials section hidden until real, approved testimonials are ready. -->
+  </div>
+</BaseLayout>
