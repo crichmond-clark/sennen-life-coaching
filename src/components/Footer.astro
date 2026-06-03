@@ -33,25 +33,27 @@ function socialIcon(platform: SocialLink['platform']) {
     <div class="flex flex-col items-center md:items-start gap-4 mb-4 md:mb-0">
       <span class="text-headline-md text-primary tracking-tight opacity-90 hover:opacity-100 transition-opacity">{brandName}</span>
       <span class="text-body-md text-on-surface-variant font-light">© {year} {brandName}. {tagline}.</span>
+    </div>
+
+    <div class="flex flex-col md:items-end gap-6">
+      {visibleLinks.length > 0 && (
+        <div class="flex items-center gap-6">
+          {visibleLinks.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+              aria-label={link.platform}
+            >
+              <Fragment set:html={socialIcon(link.platform)} />
+            </a>
+          ))}
+        </div>
+      )}
       <a href="https://askeladd.dev" target="_blank" rel="noopener noreferrer" class="text-label-caps text-on-surface-variant tracking-widest uppercase hover:text-primary transition-colors">
         Website by Askeladd
       </a>
     </div>
-
-    {visibleLinks.length > 0 && (
-      <div class="flex items-center gap-6">
-        {visibleLinks.map((link) => (
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-on-surface-variant hover:text-primary transition-colors duration-300"
-            aria-label={link.platform}
-          >
-            <Fragment set:html={socialIcon(link.platform)} />
-          </a>
-        ))}
-      </div>
-    )}
   </div>
 </footer>
